@@ -300,7 +300,10 @@
                     status: "",
                     role: "Data Engineer Intern",
                     company: "Climate Impact X",
-                    desc: "Invited to return to the company following the previous internship, recognized for strong contributions, technical expertise, proactiveness, quick learning, and effective collaboration with stakeholders"
+                    desc: [
+                        "Invited to return, recognized for strong contributions, technical expertise, proactiveness, and effective communication",
+                        "Led migration of legacy SQL views to dbt, implementing incremental materialization to reduce Snowflake compute costs by 60% and optimize query performance"
+                    ]
                 },
                 {
                     number: "02",
@@ -309,10 +312,10 @@
                     role: "Data Engineer Intern",
                     company: "Climate Impact X",
                     desc: [
-                        "Built 18 automated ETL pipelines using Airflow/PySpark/Azure to ingest market data into ADLS/Snowflake/MongoDB, eliminating 10+ manual hours weekly",
-                        "Redesigned Snowflake data architecture by consolidating 40+ views/tables into optimized staging views and business-ready models, reducing storage costs by 65% and improving query performance",
-                        "Developed dbt tests and Snowflake monitoring dashboards, which flagged a major SQL logic error and improved data quality",
-                        "Engineered 2 CI/CD pipelines with Git/Bash/Azure DevOps to automate cloud infrastructure deployment"
+                        "Built 18 automated ETL pipelines (Airflow, PySpark, Azure) to ingest data from multiple sources into Snowflake and MongoDB, saving 10+ manual hours weekly",
+                        "Refactored Snowflake architecture by consolidating 40+ views into a Medallion Architecture, significantly improving data lineage and fixing schema redundancies",
+                        "Developed dbt tests and dashboards to visualize pipeline health, flagging 3 major SQL logic errors and improving reliability",
+                        "Engineered 2 CI/CD pipelines (Bash, Azure DevOps) to automate Azure deployments and ensure environment parity"
                     ]
                 },
                 {
@@ -322,38 +325,34 @@
                     role: "Environmental Engineer Intern",
                     company: "Carbon GPT",
                     desc: [
-                        "Built 4 Streamlit applications with Groq API to automate key metric calculations, eliminating hours of manual work",
-                        "Developed ETL pipeline with Python Requests/Pandas to scrape, process, and load 1.5M+ data points into PostgreSQL",
-                        "Led client engagements and represented the company to gather user feedback and guide user-centric product improvements"
+                        "Built 4 LLM prototypes (Streamlit, Groq API) to automate manual processes, used in sales pitches to UOB, CIMB, and Bursa",
+                        "Developed ETL pipeline (Python, PostgreSQL) to process 1.5M+ records, optimizing database scalability for analysis",
+                        "Led client engagements to gather technical requirements, ensuring product alignment with user feedback"
                     ]
                 }
             ],
             projects: [
                 {
+                    title: "Real-Time Stock Streaming Dashboard",
+                    desc: "Developed a real-time stock trading simulator (Kafka, Streamlit) to stream and visualize high-frequency data",
+                    link: "https://github.com/pangyihahn/kafka-project"
+                },
+                {
+                    title: "Weather Analytics ELT Pipeline",
+                    desc: "Built a cloud-native ELT pipeline (AWS Lambda, S3, Redshift) to analyze Singapore weather trends",
+                    link: "https://github.com/pangyihahn/data-project"
+                },
+                {
                     title: "Local Snowflake SQL Transpiler",
-                    desc: "Developed a local Snowflake SQL execution environment using DuckDB for fast, cost-free query testing",
+                    desc: "Developed a local Snowflake SQL execution environment (DuckDB) for fast, cost-free query testing",
                     link: "https://github.com/pangyihahn/snowflake-project"
                 },
                 {
                     title: "SGX Derivatives Data Downloader CLI",
                     desc: "Built a Python CLI tool to automate SGX derivatives data retrieval with retry, logging, and scheduling support",
                     link: "https://github.com/pangyihahn/sgx-project"
-                },
-                {
-                    title: "Real-Time Stock Streaming Dashboard",
-                    desc: "Developed a real-time stock trading simulator with Kafka streaming and interactive Streamlit dashboard",
-                    link: "https://github.com/pangyihahn/kafka-project"
-                },
-                {
-                    title: "Weather Analytics ELT Pipeline",
-                    desc: "Built a cloud-native ELT pipeline to analyze Singapore weather trends using AWS Lambda/S3/Redshift",
-                    link: "https://github.com/pangyihahn/data-project"
-                },
-                {
-                    title: "LLM-Powered Knowledge Graph Extractor",
-                    desc: "Built a 4-step LLM pipeline to extract and visualize an interactive knowledge graph from unstructured text",
-                    link: "https://github.com/pangyihahn/llm-kg-project"
                 }
+                
             ]
         };
 
