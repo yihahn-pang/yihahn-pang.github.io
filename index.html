@@ -277,8 +277,8 @@
         
         const portfolioData = {
             socials: {
-                linkedin: "https://linkedin.com/in/pangyihahn",
-                github: "https://github.com/pangyihahn",
+                linkedin: "https://linkedin.com/in/yihahn-pang",
+                github: "https://github.com/yihahn-pang",
                 email: "mailto:yihahn.pang@gmail.com"
             },
             heroTypewriter: [
@@ -289,70 +289,76 @@
                 "Foodie"
             ],
             about: {
-                engineer: `Hey there, I am <span class="font-bold text-white">Pang</span>, a final-year Environmental Engineering and Data Analytics student at the National University of Singapore. <br><br> I’m passionate about data engineering, analytics, and machine learning. My career goal is to leverage technology to build scalable, impactful data solutions.`,
+                engineer: `Hey there, I am <span class="font-bold text-white">Yi Hahn</span>, a Data Analytics Engineer at Micron Technology and a Computer Science student at Georgia Institute of Technology. <br><br> I’m passionate about data engineering, analytics, and machine learning. My career goal is to leverage technology to build scalable, impactful data solutions.`,
                 
                 explorer: `I’m a certified climber and diver, so if you’re planning any high-mountain hikes or deep-sea adventures, please 'jio' me! <br><br> I also casually play basketball and other ball games. When I’m not balling, you’ll probably find me enjoying sushi, pizza or roti prata.`
             },
             experience: [
                 {
                     number: "01",
-                    date: "JAN 2026 - Present",
+                    date: "AUG 2026 - Present",
+                    status: "",
+                    role: "Data Analytics Engineer, Operation Intelligence",
+                    company: "Micron Technology",
+                    desc: []
+                },
+                {
+                    number: "02",
+                    date: "JAN 2026 - MAY 2026",
                     status: "",
                     role: "Data Engineer Intern",
                     company: "Climate Impact X",
                     desc: [
-                        "Invited to return for a second term; recognized for technical ownership, proactiveness, and effective communication",
-                        "Led migration of legacy SQL pipelines to dbt and implemented a materialization strategy, reducing Snowflake compute costs by 86% (from 66 to 9 mins)",
+                        "Led migration of legacy SQL pipelines to dbt and implemented materialization strategy to optimize Snowflake compute performance, reducing runtime by 86% (from 66 to 9 mins)",
                         "Developed dbt tests and monitoring dashboards to visualize data pipeline health, flagging 7 major SQL logic errors",
+                        "Piloted Microsoft Fabric Data Agent to translate natural language into database queries, optimizing semantic context and capacity cost"
                     ]
                 },
                 {
-                    number: "02",
+                    number: "03",
                     date: "JAN 2025 - JUN 2025",
                     status: "",
                     role: "Data Engineer Intern",
                     company: "Climate Impact X",
                     desc: [
-                        "Built 18 automated ETL pipelines (Airflow, PySpark, Azure) to ingest data from multiple sources into Snowflake and MongoDB, saving 10+ manual hours weekly",
-                        "Refactored Snowflake schema by consolidating 40+ views into a Medallion Architecture, significantly improving data lineage and fixing schema redundancies",
-                        "Engineered 2 CI/CD pipelines (Bash, Azure DevOps) to automate Azure deployments and ensure environment parity",
+                        "Built 18 automated ETL pipelines (Airflow, PySpark, Azure) to ingest multi-source data into Snowflake and MongoDB, saving 10+ manual hours weekly",
+                        "Refactored Snowflake schema into medallion architecture to consolidate 40+ views, improving data lineage and fixing schema redundancies",
+                        "Engineered 2 CI/CD pipelines (Bash, Azure DevOps) to automate cloud deployments, ensuring environment parity"
                     ]
                 },
                 {
-                    number: "03",
+                    number: "04",
                     date: "MAY 2024 - AUG 2024",
                     status: "",
                     role: "Environmental Engineer Intern",
                     company: "Carbon GPT",
                     desc: [
-                        "Built 4 LLM prototypes (Streamlit, Groq API) to automate manual processes, used in sales pitches to UOB, CIMB, and Bursa",
-                        "Developed ETL pipeline (Python, PostgreSQL) to process 1.5M+ records, optimizing database scalability for analysis",
-                        "Led client engagements to gather technical requirements, ensuring product alignment with user feedback"
+                        "Built 4 LLM prototypes (Streamlit, Groq API) to automate tasks, supporting pitches to UOB, CIMB, and Bursa",
+                        "Developed ETL pipeline (Python, PostgreSQL) to process 1.5M+ records, optimizing database scalability"
                     ]
                 }
             ],
             projects: [
                 {
-                    title: "Real-Time Stock Streaming Dashboard",
-                    desc: "Developed a real-time stock trading simulator (Kafka, Streamlit) to stream and visualize high-frequency data",
-                    link: "https://github.com/pangyihahn/kafka-project"
+                    title: "Local Snowflake SQL Transpiler (DuckDB, SQLGlot)",
+                    desc: "Programmed a local Snowflake SQL execution environment to enable fast, cost-free query testing",
+                    link: "https://github.com/yihahn-pang/snowflake-project"
                 },
                 {
-                    title: "Weather Analytics ELT Pipeline",
-                    desc: "Built a cloud-native ELT pipeline (AWS Lambda, S3, Redshift) to analyze Singapore weather trends",
-                    link: "https://github.com/pangyihahn/data-project"
+                    title: "Real-Time Stock Streaming Dashboard (Kafka, Docker, Streamlit)",
+                    desc: "Created a real-time stock trading simulator to stream and visualize high-frequency market data",
+                    link: "https://github.com/yihahn-pang/kafka-project"
                 },
                 {
-                    title: "Local Snowflake SQL Transpiler",
-                    desc: "Developed a local Snowflake SQL execution environment (DuckDB) for fast, cost-free query testing",
-                    link: "https://github.com/pangyihahn/snowflake-project"
+                    title: "Weather Analytics ELT Pipeline (AWS Lambda, S3, Redshift)",
+                    desc: "Engineered a cloud-native ELT pipeline to extract, load, and analyze Singapore weather data",
+                    link: "https://github.com/yihahn-pang/data-project"
                 },
                 {
-                    title: "SGX Derivatives Data Downloader CLI",
-                    desc: "Built a Python CLI tool to automate SGX derivatives data retrieval with retry, logging, and scheduling support",
-                    link: "https://github.com/pangyihahn/sgx-project"
+                    title: "SGX Derivatives Data Downloader CLI (Python)",
+                    desc: "Built a CLI tool to automate SGX derivatives data retrieval with retry, logging, and scheduling support",
+                    link: "https://github.com/yihahn-pang/sgx-project"
                 }
-                
             ]
         };
 
@@ -401,7 +407,7 @@
                     <div class="md:col-span-1 relative">
                         <span class="text-5xl font-black opacity-10 group-hover:opacity-40 transition-opacity">${job.number}</span>
                         <div class="text-sm font-bold mt-2">${job.date}</div>
-                        ${job.status ? `<div class="text-xs opacity-60 uppercase tracking-widest">${job.status}</div>` : ''}
+                        ${job.status ? `<div class="text-xs font-bold text-blue-400 opacity-80 uppercase tracking-widest mt-1">${job.status}</div>` : ''}
                     </div>
                     <div class="md:col-span-3 hover:bg-white/5 p-6 rounded-lg transition-colors border border-transparent hover:border-white/10">
                         <h4 class="text-3xl font-bold mb-1">${job.role}</h4>
@@ -447,7 +453,7 @@
             if (el) window.scrollTo({ top: el.offsetTop, behavior: 'smooth' });
         }
 
-        // Typewriter
+        // Typewriter - SPED UP
         let wordIndex = 0, charIndex = 0, isDeleting = false;
         const typingTextElement = document.getElementById('typing-text');
         
@@ -461,17 +467,20 @@
                 charIndex++;
             }
             
-            let typeSpeed = isDeleting ? 50 : 100;
+            // Speeds: typing = 60ms, deleting = 30ms
+            let typeSpeed = isDeleting ? 30 : 60; 
+            
             if (!isDeleting && charIndex === currentWord.length) {
-                isDeleting = true; typeSpeed = 1500;
+                isDeleting = true; 
+                typeSpeed = 1000; // 1 second pause when word is fully typed
             } else if (isDeleting && charIndex === 0) {
                 isDeleting = false;
                 wordIndex = (wordIndex + 1) % portfolioData.heroTypewriter.length;
-                typeSpeed = 500;
+                typeSpeed = 300; // 0.3 second pause before typing next word
             }
             setTimeout(type, typeSpeed);
         }
-        setTimeout(type, 1000);
+        setTimeout(type, 800); // Initial start delay
 
         // Snow & Observers
         const canvas = document.getElementById('snow-canvas');
