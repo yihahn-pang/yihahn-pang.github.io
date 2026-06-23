@@ -166,13 +166,6 @@
         .social-btn:hover {
             color: #0f172a;
         }
-
-        .typing-cursor::after {
-            content: '|';
-            animation: blink 1s step-end infinite;
-            margin-left: 2px;
-        }
-        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
     </style>
 </head>
 <body class="antialiased selection:bg-white selection:text-black">
@@ -208,8 +201,8 @@
                 </div>
 
                 <div class="h-12 flex items-center">
-                    <h2 class="text-xl md:text-2xl font-light tracking-wide opacity-90 typing-cursor">
-                        <span id="typing-text" class="font-bold"></span>
+                    <h2 class="text-xl md:text-2xl font-light tracking-wide opacity-90">
+                        "day-tuh" guy
                     </h2>
                 </div>
 
@@ -294,9 +287,6 @@
                 github: "https://github.com/yihahn-pang",
                 email: "mailto:yihahn.pang@gmail.com"
             },
-            heroTypewriter: [
-                'Aspiring "day-tuh" guy'
-            ],
             about: {
                 engineer: `Hey there, I am <span class="font-bold text-white">Yi Hahn</span>, an incoming Data Analytics Engineer at Micron Technology and Computer Science Master's student at Georgia Institute of Technology. <br><br> I have experience working in data engineering, analytics, and machine learning. I aim to become the "day-tuh" guy, building scalable and structured data systems essential in an AI-driven world.`,
                 
@@ -509,35 +499,6 @@
             const el = document.getElementById(id);
             if (el) window.scrollTo({ top: el.offsetTop, behavior: 'smooth' });
         }
-
-        // Typewriter - SPED UP
-        let wordIndex = 0, charIndex = 0, isDeleting = false;
-        const typingTextElement = document.getElementById('typing-text');
-        
-        function type() {
-            const currentWord = portfolioData.heroTypewriter[wordIndex];
-            if (isDeleting) {
-                typingTextElement.textContent = currentWord.substring(0, charIndex - 1);
-                charIndex--;
-            } else {
-                typingTextElement.textContent = currentWord.substring(0, charIndex + 1);
-                charIndex++;
-            }
-            
-            // Speeds: typing = 40ms, deleting = 20ms
-            let typeSpeed = isDeleting ? 20 : 40; 
-            
-            if (!isDeleting && charIndex === currentWord.length) {
-                isDeleting = true; 
-                typeSpeed = 600; // 0.6 second pause when word is fully typed
-            } else if (isDeleting && charIndex === 0) {
-                isDeleting = false;
-                wordIndex = (wordIndex + 1) % portfolioData.heroTypewriter.length;
-                typeSpeed = 200; // 0.2 second pause before typing next word
-            }
-            setTimeout(type, typeSpeed);
-        }
-        setTimeout(type, 800); // Initial start delay
 
         // Snow & Observers
         const canvas = document.getElementById('snow-canvas');
