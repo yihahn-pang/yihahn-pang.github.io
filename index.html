@@ -5,13 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yi Hahn Pang | Portfolio</title>
     
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Fonts: Montserrat -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 
     <script>
@@ -170,14 +167,12 @@
 </head>
 <body class="antialiased selection:bg-white selection:text-black">
 
-    <!-- Background -->
     <div class="bg-fixed-wrapper">
         <div id="parallax-bg" class="bg-image"></div>
     </div>
     <canvas id="snow-canvas"></canvas>
     <div class="bg-overlay"></div>
 
-    <!-- Navigation -->
     <nav class="fixed top-0 w-full z-50 p-6 md:p-8 flex justify-end items-center text-white bg-black/40 backdrop-blur-md border-b border-white/5 transition-all duration-300">
         <div class="hidden md:flex gap-10 text-xs font-bold tracking-widest uppercase">
             <button onclick="scrollToSection('about')" class="nav-link">About</button>
@@ -187,11 +182,9 @@
         </div>
     </nav>
 
-    <!-- HERO SECTION -->
     <section id="hero" class="min-h-screen flex items-center relative px-6 md:px-20 pt-20 overflow-hidden">
         <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             
-            <!-- LEFT: Big Text -->
             <div class="text-white z-10 space-y-8 opacity-0 animate-slide-in-left" style="animation-delay: 0.2s; animation-fill-mode: forwards;">
                 <div>
                     <h1 class="text-6xl md:text-8xl font-black leading-none tracking-tightest mb-4 drop-shadow-2xl">
@@ -206,13 +199,10 @@
                     </h2>
                 </div>
 
-                <!-- Social Links -->
                 <div class="flex gap-4 pt-4" id="hero-socials">
-                    <!-- Injected via JS -->
-                </div>
+                    </div>
             </div>
 
-            <!-- RIGHT: Profile Photo -->
             <div class="flex justify-center md:justify-end z-10 order-first md:order-last mb-8 md:mb-0 opacity-0 animate-slide-in-right" style="animation-delay: 0.5s; animation-fill-mode: forwards;">
                 <div class="w-80 h-80 md:w-[28rem] md:h-[28rem] relative animate-float">
                     <div class="absolute inset-0 border-2 border-white/30 transform translate-x-6 translate-y-6"></div>
@@ -223,62 +213,52 @@
     </section>
 
 
-    <!-- INTRO SECTION -->
     <section id="about" class="py-20 px-6 md:px-20 bg-black/40 backdrop-blur-md border-t border-white/5">
         <div class="max-w-6xl mx-auto reveal-on-scroll">
             <h3 class="text-sm font-bold tracking-widest uppercase mb-12 text-white/50 text-center">About</h3>
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-16" id="about-content">
-                <!-- Content Injected via JS -->
-            </div>
+                </div>
         </div>
     </section>
 
 
-    <!-- EXPERIENCE SECTION -->
     <section id="experience" class="py-20 px-6 md:px-20">
         <div class="max-w-5xl mx-auto relative">
             <h3 class="text-sm font-bold tracking-widest uppercase mb-16 border-b border-white/30 pb-4 inline-block text-white">Experience</h3>
 
             <div class="space-y-10 relative" id="experience-list">
-                <!-- Experience Items Injected via JS -->
-            </div>
+                </div>
         </div>
     </section>
 
 
-    <!-- EDUCATION SECTION -->
     <section id="education" class="py-20 px-6 md:px-20 bg-black/40 backdrop-blur-md border-t border-white/5">
         <div class="max-w-5xl mx-auto relative">
             <h3 class="text-sm font-bold tracking-widest uppercase mb-16 border-b border-white/30 pb-4 inline-block text-white">Education</h3>
 
             <div class="space-y-10 relative" id="education-list">
-                <!-- Education Items Injected via JS -->
-            </div>
+                </div>
         </div>
     </section>
 
 
-    <!-- PROJECTS SECTION -->
     <section id="projects" class="py-20 px-6 md:px-20">
         <div class="max-w-6xl mx-auto">
             <h3 class="text-sm font-bold tracking-widest uppercase mb-16 border-b border-white/30 pb-4 inline-block text-white">Projects</h3>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8" id="projects-list">
-                <!-- Projects Injected via JS -->
-            </div>
+                </div>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="py-20 text-center opacity-40">
         <p class="text-xs font-bold tracking-widest uppercase">&copy; Jun 2026 Yi Hahn Pang</p>
     </footer>
 
-    <!-- LOGIC & DATA -->
     <script>
         // ==========================================
-        //  1. PORTFOLIO CONTENT (EDIT THIS SECTION)
+        //  1. PORTFOLIO CONTENT 
         // ==========================================
         
         const portfolioData = {
@@ -384,7 +364,7 @@
 
 
         // ==========================================
-        //  2. RENDERING LOGIC (DO NOT EDIT)
+        //  2. RENDERING LOGIC 
         // ==========================================
 
         function renderPortfolio() {
@@ -487,9 +467,7 @@
             });
         }
 
-        // Run Render
         renderPortfolio();
-
 
         // ==========================================
         //  3. ANIMATION LOGIC
@@ -500,30 +478,29 @@
             if (el) window.scrollTo({ top: el.offsetTop, behavior: 'smooth' });
         }
 
-        // Snow & Observers
+        // Snow Canvas Setup
         const canvas = document.getElementById('snow-canvas');
         const ctx = canvas.getContext('2d');
         let width, height, snowflakes = [];
 
-        function resize() {
+        function resizeAndInit() {
             width = window.innerWidth;
             height = window.innerHeight;
             canvas.width = width;
             canvas.height = height;
-        }
-        function createSnowflake() {
-            return {
-                x: Math.random() * width,
-                y: Math.random() * height,
-                radius: Math.random() * 2 + 1,
-                speed: Math.random() * 1 + 0.5,
-                wind: Math.random() * 0.5 - 0.25
-            };
-        }
-        function initSnow() {
+            
             snowflakes = [];
-            for (let i = 0; i < 100; i++) snowflakes.push(createSnowflake());
+            for (let i = 0; i < 100; i++) {
+                snowflakes.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    radius: Math.random() * 2 + 1,
+                    speed: Math.random() * 1 + 0.5,
+                    wind: Math.random() * 0.5 - 0.25
+                });
+            }
         }
+
         function drawSnow() {
             ctx.clearRect(0, 0, width, height);
             ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
@@ -531,13 +508,7 @@
             for (let flake of snowflakes) {
                 ctx.moveTo(flake.x, flake.y);
                 ctx.arc(flake.x, flake.y, flake.radius, 0, Math.PI * 2);
-            }
-            ctx.fill();
-            moveSnow();
-            requestAnimationFrame(drawSnow);
-        }
-        function moveSnow() {
-            for (let flake of snowflakes) {
+                
                 flake.y += flake.speed;
                 flake.x += flake.wind;
                 if (flake.y > height) {
@@ -545,13 +516,15 @@
                     flake.x = Math.random() * width;
                 }
             }
+            ctx.fill();
+            requestAnimationFrame(drawSnow);
         }
-        window.addEventListener('resize', resize);
-        resize();
-        initSnow();
+
+        window.addEventListener('resize', resizeAndInit);
+        resizeAndInit();
         drawSnow();
 
-        // Scroll Observer
+        // Intersection Observer for scroll reveal
         document.addEventListener('DOMContentLoaded', () => {
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -562,7 +535,7 @@
             document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
         });
 
-        // Tilt
+        // 3D Tilt Effect
         document.querySelectorAll('.tilt-card').forEach(card => {
             card.addEventListener('mousemove', (e) => {
                 const rect = card.getBoundingClientRect();
