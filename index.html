@@ -249,7 +249,7 @@
         
         <!-- Experience Tab -->
         <section id="experience" class="tab-content px-6 md:px-20">
-            <div class="max-w-5xl mx-auto space-y-10" id="experience-list"></div>
+            <div class="max-w-5xl mx-auto space-y-6" id="experience-list"></div>
         </section>
 
         <!-- Skills Tab -->
@@ -264,7 +264,7 @@
 
         <!-- Education Tab -->
         <section id="education" class="tab-content px-6 md:px-20">
-            <div class="max-w-5xl mx-auto space-y-10" id="education-list"></div>
+            <div class="max-w-5xl mx-auto space-y-6" id="education-list"></div>
         </section>
         
     </div>
@@ -290,10 +290,25 @@
                 explorer: `I’m a certified climber and diver, so if you’re planning any high-mountain hikes or deep-sea adventures, please "jio" me! <br><br> I also casually play basketball and other ball games. When I’m not balling, you’ll probably find me enjoying sushi, pizza or roti prata.`
             },
             skills: [
-                { category: "Programming Languages", list: "Python (Pandas, NumPy, FastAPI), SQL, Java, R" },
-                { category: "Data Stack", list: "Spark (PySpark), Airflow, Kafka, dbt, Snowflake, Databricks, Fabric, PostgreSQL, MongoDB" },
-                { category: "Cloud, ML & BI", list: "AWS, Azure, Docker, Git, CI/CD, PyTorch, Scikit-learn, Power BI, Excel" },
-                { category: "Certifications", list: "<a href='https://www.credly.com/badges/bba4abd9-81f5-4ed4-a6aa-f4015365b16c/linked_in_profile' target='_blank' class='underline hover:text-white transition-colors'>AWS Certified Cloud Practitioner</a>, <a href='https://credentials.databricks.com/a02dda1d-38d4-4603-8807-9d2133eec2f2#acc.Hrl34Xas' target='_blank' class='underline hover:text-white transition-colors'>Databricks Certified Data Engineer Associate</a>" }
+                { 
+                    category: "Programming Languages", 
+                    items: ["Python (Pandas, NumPy, FastAPI)", "SQL", "Java", "R"] 
+                },
+                { 
+                    category: "Data Stack", 
+                    items: ["Spark (PySpark)", "Airflow", "Kafka", "dbt", "Snowflake", "Databricks", "Fabric", "PostgreSQL", "MongoDB"] 
+                },
+                { 
+                    category: "Cloud, ML & BI", 
+                    items: ["AWS", "Azure", "Docker", "Git", "CI/CD", "PyTorch", "Scikit-learn", "Power BI", "Excel"] 
+                },
+                { 
+                    category: "Certifications", 
+                    items: [
+                        "<a href='https://www.credly.com/badges/bba4abd9-81f5-4ed4-a6aa-f4015365b16c/linked_in_profile' target='_blank'>AWS Certified Cloud Practitioner <i class='fas fa-external-link-alt ml-1 opacity-70 text-[10px]'></i></a>", 
+                        "<a href='https://credentials.databricks.com/a02dda1d-38d4-4603-8807-9d2133eec2f2#acc.Hrl34Xas' target='_blank'>Databricks Certified Data Engineer Associate <i class='fas fa-external-link-alt ml-1 opacity-70 text-[10px]'></i></a>"
+                    ] 
+                }
             ],
             experience: [
                 {
@@ -415,15 +430,23 @@
             
             // Render Skills
             const skillsHTML = `
-                <ul class="space-y-6 text-gray-300 font-light leading-relaxed list-none ml-2">
-                    ${portfolioData.skills.map(skill => `
-                        <li class="relative pl-6 reveal-on-scroll">
-                            <span class="absolute left-0 top-2 w-1.5 h-1.5 bg-white/50 rounded-full"></span>
-                            <strong class="text-white tracking-widest uppercase text-sm block mb-1">${skill.category}</strong>
-                            ${skill.list}
-                        </li>
-                    `).join('')}
-                </ul>
+                <div class="space-y-8">
+                    ${portfolioData.skills.map((skill, index) => {
+                        const delay = index * 100;
+                        return `
+                        <div class="hover:bg-white/5 p-6 md:p-8 rounded-lg transition-colors border border-transparent hover:border-white/10 reveal-on-scroll" style="transition-delay: ${delay}ms">
+                            <h4 class="text-3xl font-bold mb-6">${skill.category}</h4>
+                            <div class="flex flex-wrap gap-3">
+                                ${skill.items.map(item => `
+                                    <span class="px-4 py-2 bg-white/10 rounded-md text-sm font-medium text-gray-200 border border-white/5 shadow-sm hover:bg-white/20 transition-colors">
+                                        ${item}
+                                    </span>
+                                `).join('')}
+                            </div>
+                        </div>
+                        `;
+                    }).join('')}
+                </div>
             `;
             document.getElementById('skills-content').innerHTML = skillsHTML;
 
@@ -441,7 +464,7 @@
 
                 const html = `
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-6 group reveal-on-scroll">
-                    <div class="md:col-span-1 relative">
+                    <div class="md:col-span-1 relative pt-6 pl-6">
                         <span class="text-5xl font-black opacity-10 group-hover:opacity-40 transition-opacity">${job.number}</span>
                         <div class="text-sm font-bold mt-2">${job.date}</div>
                         ${job.status ? `<div class="text-xs font-bold text-blue-400 opacity-80 uppercase tracking-widest mt-1">${job.status}</div>` : ''}
@@ -467,7 +490,7 @@
 
                 const html = `
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-6 group reveal-on-scroll">
-                    <div class="md:col-span-1 relative">
+                    <div class="md:col-span-1 relative pt-6 pl-6">
                         <span class="text-5xl font-black opacity-10 group-hover:opacity-40 transition-opacity">${edu.number}</span>
                         <div class="text-sm font-bold mt-2">${edu.date}</div>
                         ${edu.status ? `<div class="text-xs font-bold text-blue-400 opacity-80 uppercase tracking-widest mt-1">${edu.status}</div>` : ''}
