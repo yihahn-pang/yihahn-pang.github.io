@@ -29,7 +29,7 @@
                         'float': 'float 6s ease-in-out infinite',
                         'slide-in-left': 'slideInLeft 1s ease-out forwards',
                         'slide-in-right': 'slideInRight 1s ease-out forwards',
-                        'fade-in-up': 'fadeInUp 1s ease-out forwards',
+                        'fade-in-up': 'fadeInUp 0.5s ease-out forwards',
                     },
                     keyframes: {
                         float: {
@@ -122,10 +122,20 @@
             width: 100%;
         }
 
+        /* Tab Buttons */
+        .tab-btn {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        .tab-content {
+            display: none;
+            animation: fadeInUp 0.4s ease-out forwards;
+        }
+
         .reveal-on-scroll {
             opacity: 0;
             transform: translateY(30px);
-            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+            transition: all 0.6s cubic-bezier(0.5, 0, 0, 1);
         }
         .reveal-on-scroll.is-visible {
             opacity: 1;
@@ -176,13 +186,14 @@
     <nav class="fixed top-0 w-full z-50 p-6 md:p-8 flex justify-end items-center text-white bg-black/40 backdrop-blur-md border-b border-white/5 transition-all duration-300">
         <div class="hidden md:flex gap-10 text-xs font-bold tracking-widest uppercase">
             <button onclick="scrollToSection('about')" class="nav-link">About</button>
-            <button onclick="scrollToSection('skills')" class="nav-link">Skills</button>
             <button onclick="scrollToSection('experience')" class="nav-link">Experience</button>
-            <button onclick="scrollToSection('education')" class="nav-link">Education</button>
+            <button onclick="scrollToSection('skills')" class="nav-link">Skills</button>
             <button onclick="scrollToSection('projects')" class="nav-link">Projects</button>
+            <button onclick="scrollToSection('education')" class="nav-link">Education</button>
         </div>
     </nav>
 
+    <!-- Hero Section -->
     <section id="hero" class="min-h-screen flex items-center relative px-6 md:px-20 pt-20 overflow-hidden">
         <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             
@@ -201,7 +212,7 @@
                 </div>
 
                 <div class="flex gap-4 pt-4" id="hero-socials">
-                    </div>
+                </div>
             </div>
 
             <div class="flex justify-center md:justify-end z-10 order-first md:order-last mb-8 md:mb-0 opacity-0 animate-slide-in-right" style="animation-delay: 0.5s; animation-fill-mode: forwards;">
@@ -213,53 +224,52 @@
         </div>
     </section>
 
-    <section id="about" class="py-20 px-6 md:px-20 bg-black/40 backdrop-blur-md border-y border-white/5">
+    <!-- About Section -->
+    <section id="about" class="py-20 px-6 md:px-20 bg-black/40 backdrop-blur-md border-t border-white/5">
         <div class="max-w-6xl mx-auto reveal-on-scroll">
             <h3 class="text-sm font-bold tracking-widest uppercase mb-12 text-white/50 text-center">About</h3>
-            
             <div class="grid grid-cols-1 md:grid-cols-2 gap-16" id="about-content">
                 <!-- Bio loaded here -->
             </div>
         </div>
     </section>
 
-    <section id="skills" class="py-20 px-6 md:px-20">
-        <div class="max-w-5xl mx-auto relative reveal-on-scroll">
-            <h3 class="text-sm font-bold tracking-widest uppercase mb-16 border-b border-white/30 pb-4 inline-block text-white">Skills</h3>
-            
-            <div id="skills-content">
-                <!-- Skills loaded here -->
-            </div>
+    <!-- Resume Tabs Navigation -->
+    <section id="resume-tabs" class="pt-10 pb-2 px-6 md:px-20 bg-black/40 backdrop-blur-md border-t border-white/10 sticky top-[80px] z-40">
+        <div class="max-w-6xl mx-auto flex flex-wrap gap-8 text-sm font-bold tracking-widest uppercase overflow-x-auto whitespace-nowrap">
+            <button onclick="switchTab('experience')" id="tab-btn-experience" class="tab-btn border-b-2 border-transparent pb-3 text-white/50 hover:text-white transition-colors">Experience</button>
+            <button onclick="switchTab('skills')" id="tab-btn-skills" class="tab-btn border-b-2 border-transparent pb-3 text-white/50 hover:text-white transition-colors">Skills</button>
+            <button onclick="switchTab('projects')" id="tab-btn-projects" class="tab-btn border-b-2 border-transparent pb-3 text-white/50 hover:text-white transition-colors">Projects</button>
+            <button onclick="switchTab('education')" id="tab-btn-education" class="tab-btn border-b-2 border-transparent pb-3 text-white/50 hover:text-white transition-colors">Education</button>
         </div>
     </section>
 
-    <section id="experience" class="py-20 px-6 md:px-20 bg-black/40 backdrop-blur-md border-y border-white/5">
-        <div class="max-w-5xl mx-auto relative">
-            <h3 class="text-sm font-bold tracking-widest uppercase mb-16 border-b border-white/30 pb-4 inline-block text-white">Experience</h3>
+    <!-- Tab Contents Container -->
+    <div class="bg-black/40 backdrop-blur-md border-b border-white/5 pb-20 pt-10 min-h-[60vh]">
+        
+        <!-- Experience Tab -->
+        <section id="experience" class="tab-content px-6 md:px-20">
+            <div class="max-w-5xl mx-auto space-y-10" id="experience-list"></div>
+        </section>
 
-            <div class="space-y-10 relative" id="experience-list">
-                </div>
-        </div>
-    </section>
+        <!-- Skills Tab -->
+        <section id="skills" class="tab-content px-6 md:px-20">
+            <div class="max-w-5xl mx-auto" id="skills-content"></div>
+        </section>
 
-    <section id="education" class="py-20 px-6 md:px-20">
-        <div class="max-w-5xl mx-auto relative">
-            <h3 class="text-sm font-bold tracking-widest uppercase mb-16 border-b border-white/30 pb-4 inline-block text-white">Education</h3>
+        <!-- Projects Tab -->
+        <section id="projects" class="tab-content px-6 md:px-20">
+            <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8" id="projects-list"></div>
+        </section>
 
-            <div class="space-y-10 relative" id="education-list">
-                </div>
-        </div>
-    </section>
+        <!-- Education Tab -->
+        <section id="education" class="tab-content px-6 md:px-20">
+            <div class="max-w-5xl mx-auto space-y-10" id="education-list"></div>
+        </section>
+        
+    </div>
 
-    <section id="projects" class="py-20 px-6 md:px-20 bg-black/40 backdrop-blur-md border-y border-white/5">
-        <div class="max-w-6xl mx-auto">
-            <h3 class="text-sm font-bold tracking-widest uppercase mb-16 border-b border-white/30 pb-4 inline-block text-white">Projects</h3>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8" id="projects-list">
-                </div>
-        </div>
-    </section>
-
+    <!-- Footer -->
     <footer class="py-20 text-center opacity-40">
         <p class="text-xs font-bold tracking-widest uppercase">&copy; Jul 2026 Yi Hahn Pang</p>
     </footer>
@@ -277,7 +287,6 @@
             },
             about: {
                 engineer: `Hey there, I am Yi Hahn! <br><br> I specialize in data engineering, analytics, and machine learning. My career goal is to be the "day-tuh" guy who builds scalable, structured data systems for an AI-driven world.`,
-                
                 explorer: `I’m a certified climber and diver, so if you’re planning any high-mountain hikes or deep-sea adventures, please "jio" me! <br><br> I also casually play basketball and other ball games. When I’m not balling, you’ll probably find me enjoying sushi, pizza or roti prata.`
             },
             skills: [
@@ -349,8 +358,8 @@
                     desc: [
                         "GPA: 4.46/5.0 (Distinction) | ASEAN Scholar",
                         "Dissertation Project: Physics-Informed Machine Learning (Symbolic Regression) for Rainfall-Runoff Modelling",
-                        "Student Exchange Programme (University of Oulu, Finland), NUS Overseas Colleges (Kuala Lumpur, Malaysia), Impact Experience Project (Phnom Penh, Cambodia)",
-                        "Athlete (Intercollege & Interfaculty Games), Planning Committee (Asian Undergraduate Symposium & Amcisa Orientation Camp)"
+                        "Global Exposure: Student Exchange Programme (University of Oulu, Finland), NUS Overseas Colleges (Kuala Lumpur, Malaysia), Impact Experience Project (Phnom Penh, Cambodia)",
+                        "Extracurriculars: Athlete (Intercollege & Interfaculty Games), Planning Committee (Asian Undergraduate Symposium & Amcisa Orientation Camp)"
                     ]
                 }
             ],
@@ -404,11 +413,11 @@
             `;
             document.getElementById('about-content').innerHTML = aboutHTML;
             
-            // Render Skills Section
+            // Render Skills
             const skillsHTML = `
                 <ul class="space-y-6 text-gray-300 font-light leading-relaxed list-none ml-2">
                     ${portfolioData.skills.map(skill => `
-                        <li class="relative pl-6">
+                        <li class="relative pl-6 reveal-on-scroll">
                             <span class="absolute left-0 top-2 w-1.5 h-1.5 bg-white/50 rounded-full"></span>
                             <strong class="text-white tracking-widest uppercase text-sm block mb-1">${skill.category}</strong>
                             ${skill.list}
@@ -420,7 +429,7 @@
 
             // Render Experience
             const expContainer = document.getElementById('experience-list');
-            portfolioData.experience.forEach((job, index) => {
+            portfolioData.experience.forEach((job) => {
                 let descHTML = '';
                 if (Array.isArray(job.desc) && job.desc.length > 0) {
                     descHTML = `<ul class="space-y-4 text-gray-300 font-light leading-relaxed list-none">
@@ -430,9 +439,8 @@
                     descHTML = `<p class="text-gray-300 font-light leading-relaxed">${job.desc}</p>`;
                 }
 
-                const delay = index * 100;
                 const html = `
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-6 group reveal-on-scroll" style="transition-delay: ${delay}ms">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6 group reveal-on-scroll">
                     <div class="md:col-span-1 relative">
                         <span class="text-5xl font-black opacity-10 group-hover:opacity-40 transition-opacity">${job.number}</span>
                         <div class="text-sm font-bold mt-2">${job.date}</div>
@@ -449,7 +457,7 @@
 
             // Render Education
             const eduContainer = document.getElementById('education-list');
-            portfolioData.education.forEach((edu, index) => {
+            portfolioData.education.forEach((edu) => {
                 let descHTML = '';
                 if (Array.isArray(edu.desc) && edu.desc.length > 0) {
                     descHTML = `<ul class="space-y-4 text-gray-300 font-light leading-relaxed list-none">
@@ -457,9 +465,8 @@
                     </ul>`;
                 }
 
-                const delay = index * 100;
                 const html = `
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-6 group reveal-on-scroll" style="transition-delay: ${delay}ms">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6 group reveal-on-scroll">
                     <div class="md:col-span-1 relative">
                         <span class="text-5xl font-black opacity-10 group-hover:opacity-40 transition-opacity">${edu.number}</span>
                         <div class="text-sm font-bold mt-2">${edu.date}</div>
@@ -476,10 +483,9 @@
 
             // Render Projects
             const projContainer = document.getElementById('projects-list');
-            portfolioData.projects.forEach((proj, index) => {
-                const delay = index * 100;
+            portfolioData.projects.forEach((proj) => {
                 const html = `
-                <a href="${proj.link}" target="_blank" class="tilt-card block h-full bg-white/5 p-8 border border-white/10 hover:border-white/50 rounded-sm reveal-on-scroll" style="transition-delay: ${delay}ms">
+                <a href="${proj.link}" target="_blank" class="tilt-card block h-full bg-white/5 p-8 border border-white/10 hover:border-white/50 rounded-sm reveal-on-scroll">
                     <div class="flex flex-col justify-between h-full">
                         <div>
                             <div class="flex justify-between items-start mb-4">
@@ -498,14 +504,65 @@
 
         renderPortfolio();
 
+
         // ==========================================
-        //  3. ANIMATION LOGIC
+        //  3. TAB LOGIC & NAVIGATION
         // ==========================================
 
-        function scrollToSection(id) {
-            const el = document.getElementById(id);
-            if (el) window.scrollTo({ top: el.offsetTop, behavior: 'smooth' });
+        function switchTab(tabId) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.style.display = 'none';
+            });
+            // Reset all tab buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('border-white', 'text-white');
+                btn.classList.add('border-transparent', 'text-white/50');
+            });
+
+            // Show selected tab content
+            document.getElementById(tabId).style.display = 'block';
+            
+            // Highlight active button
+            const activeBtn = document.getElementById('tab-btn-' + tabId);
+            activeBtn.classList.remove('border-transparent', 'text-white/50');
+            activeBtn.classList.add('border-white', 'text-white');
+
+            // Trigger stagger animation for inner elements
+            const elements = document.getElementById(tabId).querySelectorAll('.reveal-on-scroll');
+            elements.forEach(el => el.classList.remove('is-visible'));
+            
+            setTimeout(() => {
+                elements.forEach((el, index) => {
+                    setTimeout(() => {
+                        el.classList.add('is-visible');
+                    }, index * 100);
+                });
+            }, 50);
         }
+
+        function scrollToSection(id) {
+            const tabs = ['experience', 'skills', 'projects', 'education'];
+            
+            if (tabs.includes(id)) {
+                switchTab(id);
+                // Scroll to the tab menu bar
+                const el = document.getElementById('resume-tabs');
+                if (el) window.scrollTo({ top: el.offsetTop - 80, behavior: 'smooth' });
+            } else {
+                // Scroll to standard sections (e.g. About)
+                const el = document.getElementById(id);
+                if (el) window.scrollTo({ top: el.offsetTop, behavior: 'smooth' });
+            }
+        }
+
+        // Initialize first tab on load
+        switchTab('experience');
+
+
+        // ==========================================
+        //  4. ANIMATION LOGIC (Background & Observer)
+        // ==========================================
 
         // Snow Canvas Setup
         const canvas = document.getElementById('snow-canvas');
@@ -553,7 +610,7 @@
         resizeAndInit();
         drawSnow();
 
-        // Intersection Observer for scroll reveal
+        // Standard Scroll Observer for About Section
         document.addEventListener('DOMContentLoaded', () => {
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -561,10 +618,11 @@
                 });
             }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
             
-            document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
+            // Only observe non-tab items on generic scroll
+            document.querySelectorAll('#about .reveal-on-scroll').forEach(el => observer.observe(el));
         });
 
-        // 3D Tilt Effect
+        // 3D Tilt Effect for Project Cards
         document.querySelectorAll('.tilt-card').forEach(card => {
             card.addEventListener('mousemove', (e) => {
                 const rect = card.getBoundingClientRect();
