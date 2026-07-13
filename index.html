@@ -255,9 +255,9 @@
         
         const portfolioData = {
             socials: {
+                email: "mailto:yihahn.pang@gmail.com",
                 linkedin: "https://linkedin.com/in/yihahn-pang",
-                github: "https://github.com/yihahn-pang",
-                email: "mailto:yihahn.pang@gmail.com"
+                github: "https://github.com/yihahn-pang"
             },
             about: {
                 engineer: `Hey there, I am Yi Hahn! <br><br> I specialize in data engineering, analytics, and machine learning. My career goal is to be the "day-tuh" guy who builds scalable, structured data systems for an AI-driven world.`,
@@ -346,7 +346,13 @@
                     school: "National University of Singapore",
                     desc: [
                         "GPA: 4.46/5.0 (Distinction) | ASEAN Scholar",
-                        "Dissertation Project: Physics-Informed Machine Learning (Symbolic Regression) for Rainfall-Runoff Modelling"
+                        "Dissertation Project: Physics-Informed Machine Learning (Symbolic Regression) for Rainfall-Runoff Modelling",
+                        "Student Exchange Programme (University of Oulu, Finland)",
+                        "NUS Overseas Colleges (Kuala Lumpur, Malaysia)",
+                        "Impact Experience Project (Phnom Penh, Cambodia)",
+                        "Athlete (Intercollege & Interfaculty Games)",
+                        "Planning Committee (Asian Undergraduate Symposium)",
+                        "Planning Committee (Amcisa Orientation Camp)"
                     ]
                 }
             ],
@@ -379,11 +385,10 @@
         // ==========================================
 
         function renderPortfolio() {
-            // Render Socials
             const socialHTML = `
+                <a href="${portfolioData.socials.email}" class="social-btn border border-white/30 rounded-full w-12 h-12 flex items-center justify-center text-lg" title="Email"><i class="fas fa-envelope"></i></a>
                 <a href="${portfolioData.socials.linkedin}" target="_blank" class="social-btn border border-white/30 rounded-full w-12 h-12 flex items-center justify-center text-lg" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                 <a href="${portfolioData.socials.github}" target="_blank" class="social-btn border border-white/30 rounded-full w-12 h-12 flex items-center justify-center text-lg" title="GitHub"><i class="fab fa-github"></i></a>
-                <a href="${portfolioData.socials.email}" class="social-btn border border-white/30 rounded-full w-12 h-12 flex items-center justify-center text-lg" title="Email"><i class="fas fa-envelope"></i></a>
             `;
             document.getElementById('hero-socials').innerHTML = socialHTML;
 
