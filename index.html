@@ -29,7 +29,7 @@
                         'float': 'float 6s ease-in-out infinite',
                         'slide-in-left': 'slideInLeft 1s ease-out forwards',
                         'slide-in-right': 'slideInRight 1s ease-out forwards',
-                        'fade-in-up': 'fadeInUp 0.5s ease-out forwards',
+                        'fade-in-up': 'fadeInUp 1s ease-out forwards',
                     },
                     keyframes: {
                         float: {
@@ -122,20 +122,10 @@
             width: 100%;
         }
 
-        /* Tab Buttons */
-        .tab-btn {
-            position: relative;
-            transition: color 0.3s ease;
-        }
-        .tab-content {
-            display: none;
-            animation: fadeInUp 0.4s ease-out forwards;
-        }
-
         .reveal-on-scroll {
             opacity: 0;
             transform: translateY(30px);
-            transition: all 0.6s cubic-bezier(0.5, 0, 0, 1);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
         }
         .reveal-on-scroll.is-visible {
             opacity: 1;
@@ -187,13 +177,11 @@
         <div class="hidden md:flex gap-10 text-xs font-bold tracking-widest uppercase">
             <button onclick="scrollToSection('about')" class="nav-link">About</button>
             <button onclick="scrollToSection('experience')" class="nav-link">Experience</button>
-            <button onclick="scrollToSection('skills')" class="nav-link">Skills</button>
-            <button onclick="scrollToSection('projects')" class="nav-link">Projects</button>
             <button onclick="scrollToSection('education')" class="nav-link">Education</button>
+            <button onclick="scrollToSection('projects')" class="nav-link">Projects</button>
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <section id="hero" class="min-h-screen flex items-center relative px-6 md:px-20 pt-20 overflow-hidden">
         <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             
@@ -212,7 +200,7 @@
                 </div>
 
                 <div class="flex gap-4 pt-4" id="hero-socials">
-                </div>
+                    </div>
             </div>
 
             <div class="flex justify-center md:justify-end z-10 order-first md:order-last mb-8 md:mb-0 opacity-0 animate-slide-in-right" style="animation-delay: 0.5s; animation-fill-mode: forwards;">
@@ -224,52 +212,47 @@
         </div>
     </section>
 
-    <!-- About Section -->
     <section id="about" class="py-20 px-6 md:px-20 bg-black/40 backdrop-blur-md border-t border-white/5">
         <div class="max-w-6xl mx-auto reveal-on-scroll">
             <h3 class="text-sm font-bold tracking-widest uppercase mb-12 text-white/50 text-center">About</h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-16" id="about-content">
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16 mb-20" id="about-content">
                 <!-- Bio loaded here -->
+            </div>
+            
+            <div id="skills-content" class="pt-8 border-t border-white/10">
+                <!-- Skills loaded here -->
             </div>
         </div>
     </section>
 
-    <!-- Resume Tabs Navigation -->
-    <section id="resume-tabs" class="pt-10 pb-2 px-6 md:px-20 bg-black/40 backdrop-blur-md border-t border-white/10 sticky top-[80px] z-40">
-        <div class="max-w-6xl mx-auto flex flex-wrap gap-8 text-sm font-bold tracking-widest uppercase overflow-x-auto whitespace-nowrap">
-            <button onclick="switchTab('experience')" id="tab-btn-experience" class="tab-btn border-b-2 border-transparent pb-3 text-white/50 hover:text-white transition-colors">Experience</button>
-            <button onclick="switchTab('skills')" id="tab-btn-skills" class="tab-btn border-b-2 border-transparent pb-3 text-white/50 hover:text-white transition-colors">Skills</button>
-            <button onclick="switchTab('projects')" id="tab-btn-projects" class="tab-btn border-b-2 border-transparent pb-3 text-white/50 hover:text-white transition-colors">Projects</button>
-            <button onclick="switchTab('education')" id="tab-btn-education" class="tab-btn border-b-2 border-transparent pb-3 text-white/50 hover:text-white transition-colors">Education</button>
+    <section id="experience" class="py-20 px-6 md:px-20">
+        <div class="max-w-5xl mx-auto relative">
+            <h3 class="text-sm font-bold tracking-widest uppercase mb-16 border-b border-white/30 pb-4 inline-block text-white">Experience</h3>
+
+            <div class="space-y-10 relative" id="experience-list">
+                </div>
         </div>
     </section>
 
-    <!-- Tab Contents Container -->
-    <div class="bg-black/40 backdrop-blur-md border-b border-white/5 pb-20 pt-10 min-h-[60vh]">
-        
-        <!-- Experience Tab -->
-        <section id="experience" class="tab-content px-6 md:px-20">
-            <div class="max-w-5xl mx-auto space-y-6" id="experience-list"></div>
-        </section>
+    <section id="education" class="py-20 px-6 md:px-20 bg-black/40 backdrop-blur-md border-t border-white/5">
+        <div class="max-w-5xl mx-auto relative">
+            <h3 class="text-sm font-bold tracking-widest uppercase mb-16 border-b border-white/30 pb-4 inline-block text-white">Education</h3>
 
-        <!-- Skills Tab -->
-        <section id="skills" class="tab-content px-6 md:px-20">
-            <div class="max-w-5xl mx-auto" id="skills-content"></div>
-        </section>
+            <div class="space-y-10 relative" id="education-list">
+                </div>
+        </div>
+    </section>
 
-        <!-- Projects Tab -->
-        <section id="projects" class="tab-content px-6 md:px-20">
-            <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8" id="projects-list"></div>
-        </section>
+    <section id="projects" class="py-20 px-6 md:px-20">
+        <div class="max-w-6xl mx-auto">
+            <h3 class="text-sm font-bold tracking-widest uppercase mb-16 border-b border-white/30 pb-4 inline-block text-white">Projects</h3>
 
-        <!-- Education Tab -->
-        <section id="education" class="tab-content px-6 md:px-20">
-            <div class="max-w-5xl mx-auto space-y-6" id="education-list"></div>
-        </section>
-        
-    </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8" id="projects-list">
+                </div>
+        </div>
+    </section>
 
-    <!-- Footer -->
     <footer class="py-20 text-center opacity-40">
         <p class="text-xs font-bold tracking-widest uppercase">&copy; Jul 2026 Yi Hahn Pang</p>
     </footer>
@@ -287,34 +270,20 @@
             },
             about: {
                 engineer: `Hey there, I am Yi Hahn! <br><br> I specialize in data engineering, analytics, and machine learning. My career goal is to be the "day-tuh" guy who builds scalable, structured data systems for an AI-driven world.`,
+                
                 explorer: `I’m a certified climber and diver, so if you’re planning any high-mountain hikes or deep-sea adventures, please "jio" me! <br><br> I also casually play basketball and other ball games. When I’m not balling, you’ll probably find me enjoying sushi, pizza or roti prata.`
             },
             skills: [
-                { 
-                    category: "Programming Languages", 
-                    items: ["Python (Pandas, NumPy, FastAPI)", "SQL", "Java", "R"] 
-                },
-                { 
-                    category: "Data Stack", 
-                    items: ["Spark (PySpark)", "Airflow", "Kafka", "dbt", "Snowflake", "Databricks", "Fabric", "PostgreSQL", "MongoDB"] 
-                },
-                { 
-                    category: "Cloud, ML & BI", 
-                    items: ["AWS", "Azure", "Docker", "Git", "CI/CD", "PyTorch", "Scikit-learn", "Power BI", "Excel"] 
-                },
-                { 
-                    category: "Certifications", 
-                    items: [
-                        "<a href='https://www.credly.com/badges/bba4abd9-81f5-4ed4-a6aa-f4015365b16c/linked_in_profile' target='_blank'>AWS Certified Cloud Practitioner <i class='fas fa-external-link-alt ml-1 opacity-70 text-[10px]'></i></a>", 
-                        "<a href='https://credentials.databricks.com/a02dda1d-38d4-4603-8807-9d2133eec2f2#acc.Hrl34Xas' target='_blank'>Databricks Certified Data Engineer Associate <i class='fas fa-external-link-alt ml-1 opacity-70 text-[10px]'></i></a>"
-                    ] 
-                }
+                { category: "Programming Languages", list: "Python (Pandas, NumPy, FastAPI), SQL, Java, R" },
+                { category: "Data Stack", list: "Spark (PySpark), Airflow, Kafka, dbt, Snowflake, Databricks, Fabric, PostgreSQL, MongoDB" },
+                { category: "Cloud, ML & BI", list: "AWS, Azure, Docker, Git, CI/CD, PyTorch, Scikit-learn, Power BI, Excel" },
+                { category: "Certifications", list: "AWS Certified Cloud Practitioner, Databricks Certified Data Engineer Associate" }
             ],
             experience: [
                 {
                     number: "01",
                     date: "JUL 2026 - Present",
-                    status: "",
+                    status: "Incoming",
                     role: "Data Analytics Engineer, Operation Intelligence",
                     company: "Micron Technology",
                     desc: []
@@ -359,7 +328,7 @@
                 {
                     number: "01",
                     date: "AUG 2026 - Present",
-                    status: "",
+                    status: "Incoming",
                     degree: "Master of Science, Computer Science (Computing Systems)",
                     school: "Georgia Institute of Technology",
                     desc: []
@@ -373,8 +342,8 @@
                     desc: [
                         "GPA: 4.46/5.0 (Distinction) | ASEAN Scholar",
                         "Dissertation Project: Physics-Informed Machine Learning (Symbolic Regression) for Rainfall-Runoff Modelling",
-                        "Student Exchange Programme (University of Oulu, Finland), NUS Overseas Colleges (Kuala Lumpur, Malaysia), Impact Experience Project (Phnom Penh, Cambodia)",
-                        "Athlete (Intercollege & Interfaculty Games), Planning Committee (Asian Undergraduate Symposium & Amcisa Orientation Camp)"
+                        "Global Exposure: Student Exchange Programme (University of Oulu, Finland), NUS Overseas Colleges (Kuala Lumpur, Malaysia), Impact Experience Project (Phnom Penh, Cambodia)",
+                        "Extracurriculars: Athlete (Intercollege & Interfaculty Games), Planning Committee (Asian Undergraduate Symposium & Amcisa Orientation Camp)"
                     ]
                 }
             ],
@@ -428,31 +397,23 @@
             `;
             document.getElementById('about-content').innerHTML = aboutHTML;
             
-            // Render Skills
+            // Render Skills Section
             const skillsHTML = `
-                <div class="space-y-8">
-                    ${portfolioData.skills.map((skill, index) => {
-                        const delay = index * 100;
-                        return `
-                        <div class="hover:bg-white/5 p-6 md:p-8 rounded-lg transition-colors border border-transparent hover:border-white/10 reveal-on-scroll" style="transition-delay: ${delay}ms">
-                            <h4 class="text-3xl font-bold mb-6">${skill.category}</h4>
-                            <div class="flex flex-wrap gap-3">
-                                ${skill.items.map(item => `
-                                    <span class="px-4 py-2 bg-white/10 rounded-md text-sm font-medium text-gray-200 border border-white/5 shadow-sm hover:bg-white/20 transition-colors">
-                                        ${item}
-                                    </span>
-                                `).join('')}
-                            </div>
+                <h4 class="text-2xl font-bold text-white border-l-4 border-white pl-4 mb-8">Technical Arsenal</h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    ${portfolioData.skills.map(skill => `
+                        <div>
+                            <h5 class="text-xs font-bold text-white/50 uppercase tracking-widest mb-2">${skill.category}</h5>
+                            <p class="text-gray-300 font-light leading-relaxed">${skill.list}</p>
                         </div>
-                        `;
-                    }).join('')}
+                    `).join('')}
                 </div>
             `;
             document.getElementById('skills-content').innerHTML = skillsHTML;
 
             // Render Experience
             const expContainer = document.getElementById('experience-list');
-            portfolioData.experience.forEach((job) => {
+            portfolioData.experience.forEach((job, index) => {
                 let descHTML = '';
                 if (Array.isArray(job.desc) && job.desc.length > 0) {
                     descHTML = `<ul class="space-y-4 text-gray-300 font-light leading-relaxed list-none">
@@ -462,9 +423,10 @@
                     descHTML = `<p class="text-gray-300 font-light leading-relaxed">${job.desc}</p>`;
                 }
 
+                const delay = index * 100;
                 const html = `
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-6 group reveal-on-scroll">
-                    <div class="md:col-span-1 relative pt-6 pl-6">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6 group reveal-on-scroll" style="transition-delay: ${delay}ms">
+                    <div class="md:col-span-1 relative">
                         <span class="text-5xl font-black opacity-10 group-hover:opacity-40 transition-opacity">${job.number}</span>
                         <div class="text-sm font-bold mt-2">${job.date}</div>
                         ${job.status ? `<div class="text-xs font-bold text-blue-400 opacity-80 uppercase tracking-widest mt-1">${job.status}</div>` : ''}
@@ -480,7 +442,7 @@
 
             // Render Education
             const eduContainer = document.getElementById('education-list');
-            portfolioData.education.forEach((edu) => {
+            portfolioData.education.forEach((edu, index) => {
                 let descHTML = '';
                 if (Array.isArray(edu.desc) && edu.desc.length > 0) {
                     descHTML = `<ul class="space-y-4 text-gray-300 font-light leading-relaxed list-none">
@@ -488,9 +450,10 @@
                     </ul>`;
                 }
 
+                const delay = index * 100;
                 const html = `
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-6 group reveal-on-scroll">
-                    <div class="md:col-span-1 relative pt-6 pl-6">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6 group reveal-on-scroll" style="transition-delay: ${delay}ms">
+                    <div class="md:col-span-1 relative">
                         <span class="text-5xl font-black opacity-10 group-hover:opacity-40 transition-opacity">${edu.number}</span>
                         <div class="text-sm font-bold mt-2">${edu.date}</div>
                         ${edu.status ? `<div class="text-xs font-bold text-blue-400 opacity-80 uppercase tracking-widest mt-1">${edu.status}</div>` : ''}
@@ -506,9 +469,10 @@
 
             // Render Projects
             const projContainer = document.getElementById('projects-list');
-            portfolioData.projects.forEach((proj) => {
+            portfolioData.projects.forEach((proj, index) => {
+                const delay = index * 100;
                 const html = `
-                <a href="${proj.link}" target="_blank" class="tilt-card block h-full bg-white/5 p-8 border border-white/10 hover:border-white/50 rounded-sm reveal-on-scroll">
+                <a href="${proj.link}" target="_blank" class="tilt-card block h-full bg-white/5 p-8 border border-white/10 hover:border-white/50 rounded-sm reveal-on-scroll" style="transition-delay: ${delay}ms">
                     <div class="flex flex-col justify-between h-full">
                         <div>
                             <div class="flex justify-between items-start mb-4">
@@ -527,65 +491,14 @@
 
         renderPortfolio();
 
-
         // ==========================================
-        //  3. TAB LOGIC & NAVIGATION
+        //  3. ANIMATION LOGIC
         // ==========================================
-
-        function switchTab(tabId) {
-            // Hide all tab contents
-            document.querySelectorAll('.tab-content').forEach(tab => {
-                tab.style.display = 'none';
-            });
-            // Reset all tab buttons
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.classList.remove('border-white', 'text-white');
-                btn.classList.add('border-transparent', 'text-white/50');
-            });
-
-            // Show selected tab content
-            document.getElementById(tabId).style.display = 'block';
-            
-            // Highlight active button
-            const activeBtn = document.getElementById('tab-btn-' + tabId);
-            activeBtn.classList.remove('border-transparent', 'text-white/50');
-            activeBtn.classList.add('border-white', 'text-white');
-
-            // Trigger stagger animation for inner elements
-            const elements = document.getElementById(tabId).querySelectorAll('.reveal-on-scroll');
-            elements.forEach(el => el.classList.remove('is-visible'));
-            
-            setTimeout(() => {
-                elements.forEach((el, index) => {
-                    setTimeout(() => {
-                        el.classList.add('is-visible');
-                    }, index * 100);
-                });
-            }, 50);
-        }
 
         function scrollToSection(id) {
-            const tabs = ['experience', 'skills', 'projects', 'education'];
-            
-            if (tabs.includes(id)) {
-                switchTab(id);
-                // Scroll to the tab menu bar
-                const el = document.getElementById('resume-tabs');
-                if (el) window.scrollTo({ top: el.offsetTop - 80, behavior: 'smooth' });
-            } else {
-                // Scroll to standard sections (e.g. About)
-                const el = document.getElementById(id);
-                if (el) window.scrollTo({ top: el.offsetTop, behavior: 'smooth' });
-            }
+            const el = document.getElementById(id);
+            if (el) window.scrollTo({ top: el.offsetTop, behavior: 'smooth' });
         }
-
-        // Initialize first tab on load
-        switchTab('experience');
-
-
-        // ==========================================
-        //  4. ANIMATION LOGIC (Background & Observer)
-        // ==========================================
 
         // Snow Canvas Setup
         const canvas = document.getElementById('snow-canvas');
@@ -633,7 +546,7 @@
         resizeAndInit();
         drawSnow();
 
-        // Standard Scroll Observer for About Section
+        // Intersection Observer for scroll reveal
         document.addEventListener('DOMContentLoaded', () => {
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -641,11 +554,10 @@
                 });
             }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
             
-            // Only observe non-tab items on generic scroll
-            document.querySelectorAll('#about .reveal-on-scroll').forEach(el => observer.observe(el));
+            document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
         });
 
-        // 3D Tilt Effect for Project Cards
+        // 3D Tilt Effect
         document.querySelectorAll('.tilt-card').forEach(card => {
             card.addEventListener('mousemove', (e) => {
                 const rect = card.getBoundingClientRect();
