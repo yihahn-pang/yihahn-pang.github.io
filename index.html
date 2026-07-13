@@ -6,8 +6,10 @@
     <title>Yi Hahn Pang | Portfolio</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 
     <script>
         tailwind.config = {
@@ -17,9 +19,7 @@
                 },
                 extend: {
                     colors: {
-                        'accent': '#38bdf8', // Light blue tech accent
-                        'surface': 'rgba(255, 255, 255, 0.03)',
-                        'surface-hover': 'rgba(255, 255, 255, 0.08)',
+                        'accent': '#ffffff', 
                     },
                     letterSpacing: {
                         'tightest': '-0.05em',
@@ -27,9 +27,9 @@
                     },
                     animation: {
                         'float': 'float 6s ease-in-out infinite',
-                        'slide-in-left': 'slideInLeft 1s cubic-bezier(0.16, 1, 0.3, 1) forwards',
-                        'slide-in-right': 'slideInRight 1s cubic-bezier(0.16, 1, 0.3, 1) forwards',
-                        'glow': 'glow 3s ease-in-out infinite alternate',
+                        'slide-in-left': 'slideInLeft 1s ease-out forwards',
+                        'slide-in-right': 'slideInRight 1s ease-out forwards',
+                        'fade-in-up': 'fadeInUp 1s ease-out forwards',
                     },
                     keyframes: {
                         float: {
@@ -44,9 +44,9 @@
                             '0%': { opacity: '0', transform: 'translateX(50px)' },
                             '100%': { opacity: '1', transform: 'translateX(0)' },
                         },
-                        glow: {
-                            '0%': { boxShadow: '0 0 15px rgba(56, 189, 248, 0.1)' },
-                            '100%': { boxShadow: '0 0 30px rgba(56, 189, 248, 0.3)' },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
                         }
                     }
                 }
@@ -56,101 +56,124 @@
     
     <style>
         body {
-            background-color: #020617; /* Slate 950 */
+            background-color: #0f172a;
             color: #f8fafc;
             overflow-x: hidden;
             cursor: default;
         }
 
-        /* --- Background Effects --- */
+        /* --- Background Wrapper --- */
         .bg-fixed-wrapper {
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -3; overflow: hidden;
-            background: radial-gradient(circle at 15% 50%, rgba(15, 23, 42, 1), #020617 50%);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -3;
+            overflow: hidden;
         }
         
         #snow-canvas {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -2; pointer-events: none; opacity: 0.5;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            pointer-events: none;
+        }
+        
+        .bg-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            background-image: url('background.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .bg-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(15, 23, 42, 0.9) 0%, rgba(15, 23, 42, 0.6) 50%, rgba(15, 23, 42, 0.3) 100%);
+            z-index: -1;
+            pointer-events: none;
         }
 
-        /* --- Glass & Interactions --- */
-        .glass-panel {
-            background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 1rem;
-        }
-
+        /* --- Animations & Interactions --- */
         .nav-link {
             position: relative;
-            padding-bottom: 4px;
-            color: rgba(255,255,255,0.7);
-            transition: color 0.3s ease;
+            padding-bottom: 2px;
         }
-        .nav-link:hover { color: white; }
         .nav-link::after {
-            content: ''; position: absolute; width: 0; height: 2px;
-            bottom: 0; left: 0; background-color: #38bdf8;
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: white;
             transition: width 0.3s ease-in-out;
         }
-        .nav-link:hover::after { width: 100%; }
+        .nav-link:hover::after {
+            width: 100%;
+        }
 
         .reveal-on-scroll {
-            opacity: 0; transform: translateY(30px);
-            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
         }
         .reveal-on-scroll.is-visible {
-            opacity: 1; transform: translateY(0);
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .tilt-card {
-            transition: transform 0.1s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            transition: transform 0.1s ease, box-shadow 0.3s ease;
             transform-style: preserve-3d;
         }
         .tilt-card:hover {
-            box-shadow: 0 20px 40px rgba(0,0,0,0.6), 0 0 20px rgba(56, 189, 248, 0.1);
-            border-color: rgba(56, 189, 248, 0.3);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
             z-index: 10;
         }
 
         .social-btn {
-            position: relative; overflow: hidden;
+            position: relative;
+            overflow: hidden;
             transition: all 0.3s ease;
-            background: rgba(255,255,255,0.05);
+        }
+        .social-btn::before {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            transition: top 0.3s ease;
+            z-index: -1;
+        }
+        .social-btn:hover::before {
+            top: 0;
         }
         .social-btn:hover {
-            background: #38bdf8;
-            color: #020617;
-            border-color: #38bdf8;
-            transform: translateY(-3px);
-        }
-
-        .badge-marquee-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            justify-content: center;
-        }
-        .badge-marquee-container img {
-            height: 28px;
-            border-radius: 4px;
-            transition: transform 0.2s ease;
-        }
-        .badge-marquee-container img:hover {
-            transform: scale(1.1);
+            color: #0f172a;
         }
     </style>
 </head>
-<body class="antialiased selection:bg-accent selection:text-white">
+<body class="antialiased selection:bg-white selection:text-black">
 
-    <div class="bg-fixed-wrapper"></div>
+    <div class="bg-fixed-wrapper">
+        <div id="parallax-bg" class="bg-image"></div>
+    </div>
     <canvas id="snow-canvas"></canvas>
+    <div class="bg-overlay"></div>
 
-    <!-- Navigation -->
-    <nav class="fixed top-0 w-full z-50 p-6 md:p-8 flex justify-end items-center text-white bg-slate-950/60 backdrop-blur-xl border-b border-white/5 transition-all duration-300">
+    <nav class="fixed top-0 w-full z-50 p-6 md:p-8 flex justify-end items-center text-white bg-black/40 backdrop-blur-md border-b border-white/5 transition-all duration-300">
         <div class="hidden md:flex gap-10 text-xs font-bold tracking-widest uppercase">
             <button onclick="scrollToSection('about')" class="nav-link">About</button>
             <button onclick="scrollToSection('experience')" class="nav-link">Experience</button>
@@ -159,113 +182,84 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <section id="hero" class="min-h-screen flex items-center relative px-6 md:px-20 pt-20 overflow-hidden">
-        <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center relative z-10">
-            <div class="text-white space-y-6 opacity-0 animate-slide-in-left" style="animation-delay: 0.2s;">
+        <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            
+            <div class="text-white z-10 space-y-8 opacity-0 animate-slide-in-left" style="animation-delay: 0.2s; animation-fill-mode: forwards;">
                 <div>
-                    <h2 class="text-accent font-bold tracking-widest uppercase mb-4 text-sm">Portfolio</h2>
                     <h1 class="text-6xl md:text-8xl font-black leading-none tracking-tightest mb-4 drop-shadow-2xl">
                         YI HAHN <br> PANG
                     </h1>
-                    <div class="h-1 w-24 bg-gradient-to-r from-accent to-transparent mb-6"></div>
+                    <div class="h-1 w-24 bg-white mb-6"></div>
                 </div>
 
                 <div class="h-12 flex items-center">
-                    <h2 class="text-xl md:text-2xl font-light tracking-wide text-gray-300">
-                        <span class="font-semibold text-white">"day-tuh"</span> guy.
+                    <h2 class="text-xl md:text-2xl font-light tracking-wide opacity-90">
+                        "day-tuh" guy
                     </h2>
                 </div>
 
-                <div class="flex gap-4 pt-4" id="hero-socials"></div>
+                <div class="flex gap-4 pt-4" id="hero-socials">
+                    </div>
             </div>
 
-            <div class="flex justify-center md:justify-end order-first md:order-last mb-8 md:mb-0 opacity-0 animate-slide-in-right" style="animation-delay: 0.5s;">
-                <div class="w-72 h-72 md:w-[26rem] md:h-[26rem] relative animate-float">
-                    <div class="absolute inset-0 border-2 border-accent/40 rounded-full transform translate-x-4 translate-y-4"></div>
-                    <img src="profile.jpg" alt="Profile" class="w-full h-full object-cover rounded-full shadow-2xl relative z-10 animate-glow border border-white/10 grayscale hover:grayscale-0 transition-all duration-500" onerror="this.src='https://ui-avatars.com/api/?name=Yi+Hahn&size=512&background=0D8ABC&color=fff'">
+            <div class="flex justify-center md:justify-end z-10 order-first md:order-last mb-8 md:mb-0 opacity-0 animate-slide-in-right" style="animation-delay: 0.5s; animation-fill-mode: forwards;">
+                <div class="w-80 h-80 md:w-[28rem] md:h-[28rem] relative animate-float">
+                    <div class="absolute inset-0 border-2 border-white/30 transform translate-x-6 translate-y-6"></div>
+                    <img src="profile.jpg" alt="Profile" class="w-full h-full object-cover shadow-2xl relative z-10 transition-all duration-700">
                 </div>
             </div>
         </div>
     </section>
 
-
-    <!-- About Section -->
-    <section id="about" class="py-24 px-6 md:px-20 relative">
+    <section id="about" class="py-20 px-6 md:px-20 bg-black/40 backdrop-blur-md border-t border-white/5">
         <div class="max-w-6xl mx-auto reveal-on-scroll">
-            <div class="flex items-center gap-4 mb-16">
-                <h3 class="text-sm font-bold tracking-widest uppercase text-accent">About Me</h3>
-                <div class="h-px flex-grow bg-gradient-to-r from-accent/50 to-transparent"></div>
+            <h3 class="text-sm font-bold tracking-widest uppercase mb-12 text-white/50 text-center">About</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16 mb-20" id="about-content">
+                <!-- Bio loaded here -->
             </div>
             
-            <!-- Bio Split -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-20" id="about-content"></div>
-
-            <!-- Tech Stack & Skills -->
-            <div class="glass-panel p-8 md:p-12 relative overflow-hidden">
-                <div class="absolute top-0 right-0 w-64 h-64 bg-accent/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
-                
-                <h4 class="text-xl font-bold mb-8 text-center uppercase tracking-widest">Technical Arsenal</h4>
-                
-                <!-- Shield Badges -->
-                <div class="badge-marquee-container mb-12" id="shield-badges"></div>
-
-                <!-- Text Categories -->
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8" id="skill-categories"></div>
+            <div id="skills-content" class="pt-8 border-t border-white/10">
+                <!-- Skills loaded here -->
             </div>
         </div>
     </section>
 
-
-    <!-- Experience Section -->
-    <section id="experience" class="py-24 px-6 md:px-20 bg-slate-900/30">
+    <section id="experience" class="py-20 px-6 md:px-20">
         <div class="max-w-5xl mx-auto relative">
-            <div class="flex items-center gap-4 mb-16">
-                <h3 class="text-sm font-bold tracking-widest uppercase text-accent">Experience</h3>
-                <div class="h-px w-24 bg-gradient-to-r from-accent/50 to-transparent"></div>
-            </div>
+            <h3 class="text-sm font-bold tracking-widest uppercase mb-16 border-b border-white/30 pb-4 inline-block text-white">Experience</h3>
 
-            <div class="space-y-6 relative" id="experience-list"></div>
+            <div class="space-y-10 relative" id="experience-list">
+                </div>
         </div>
     </section>
 
-
-    <!-- Education Section -->
-    <section id="education" class="py-24 px-6 md:px-20">
+    <section id="education" class="py-20 px-6 md:px-20 bg-black/40 backdrop-blur-md border-t border-white/5">
         <div class="max-w-5xl mx-auto relative">
-            <div class="flex items-center gap-4 mb-16">
-                <h3 class="text-sm font-bold tracking-widest uppercase text-accent">Education</h3>
-                <div class="h-px w-24 bg-gradient-to-r from-accent/50 to-transparent"></div>
-            </div>
+            <h3 class="text-sm font-bold tracking-widest uppercase mb-16 border-b border-white/30 pb-4 inline-block text-white">Education</h3>
 
-            <div class="space-y-6 relative" id="education-list"></div>
+            <div class="space-y-10 relative" id="education-list">
+                </div>
         </div>
     </section>
 
-
-    <!-- Projects Section -->
-    <section id="projects" class="py-24 px-6 md:px-20 bg-slate-900/30">
+    <section id="projects" class="py-20 px-6 md:px-20">
         <div class="max-w-6xl mx-auto">
-            <div class="flex items-center gap-4 mb-16">
-                <h3 class="text-sm font-bold tracking-widest uppercase text-accent">Selected Projects</h3>
-                <div class="h-px w-24 bg-gradient-to-r from-accent/50 to-transparent"></div>
-            </div>
+            <h3 class="text-sm font-bold tracking-widest uppercase mb-16 border-b border-white/30 pb-4 inline-block text-white">Projects</h3>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="projects-list"></div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8" id="projects-list">
+                </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="py-12 border-t border-white/5 bg-slate-950">
-        <div class="text-center opacity-50 hover:opacity-100 transition-opacity">
-            <p class="text-xs font-bold tracking-widest uppercase">&copy; Jul 2026 Yi Hahn Pang</p>
-            <p class="text-xs mt-2 text-accent/80 font-light">Built for scale.</p>
-        </div>
+    <footer class="py-20 text-center opacity-40">
+        <p class="text-xs font-bold tracking-widest uppercase">&copy; Jul 2026 Yi Hahn Pang</p>
     </footer>
 
     <script>
         // ==========================================
-        //  1. PORTFOLIO DATA (Updated)
+        //  1. PORTFOLIO CONTENT 
         // ==========================================
         
         const portfolioData = {
@@ -275,45 +269,16 @@
                 email: "mailto:yihahn.pang@gmail.com"
             },
             about: {
-                engineer: `I specialize in data engineering, analytics, and machine learning. My career goal is to be the "day-tuh" guy who builds scalable, structured data systems for an AI-driven world.`,
+                engineer: `Hey there, I am Yi Hahn! <br><br> I specialize in data engineering, analytics, and machine learning. My career goal is to be the "day-tuh" guy who builds scalable, structured data systems for an AI-driven world.`,
                 
-                explorer: `Beyond the terminal, I’m a certified climber and diver—if you’re planning any high-mountain hikes or deep-sea adventures, please "jio" me! I also casually play basketball, and when I’m not balling, you’ll find me hunting down the best sushi, pizza, or roti prata.`
+                explorer: `I’m a certified climber and diver, so if you’re planning any high-mountain hikes or deep-sea adventures, please "jio" me! <br><br> I also casually play basketball and other ball games. When I’m not balling, you’ll probably find me enjoying sushi, pizza or roti prata.`
             },
-            skills: {
-                badges: [
-                    "Python-3776AB?logo=python&logoColor=white",
-                    "Pandas-150458?logo=pandas&logoColor=white",
-                    "Numpy-013243?logo=numpy&logoColor=white",
-                    "FastAPI-009688?logo=fastapi&logoColor=white",
-                    "SQL-4479A1?logo=mysql&logoColor=white",
-                    "Java-ED8B00?logo=openjdk&logoColor=white",
-                    "R-276DC3?logo=r&logoColor=white",
-                    "AWS-232F3E?logo=amazon-aws&logoColor=white",
-                    "Azure-0078D4?logo=microsoftazure&logoColor=white",
-                    "Docker-2496ED?logo=docker&logoColor=white",
-                    "GIT-E44C30?logo=git&logoColor=white",
-                    "CI%2FCD-2088FF?logo=github-actions&logoColor=white",
-                    "Apache%20Spark-E25A1C?logo=apachespark&logoColor=white",
-                    "Apache%20Airflow-017CEE?logo=apacheairflow&logoColor=white",
-                    "Apache%20Kafka-231F20?logo=apachekafka&logoColor=white",
-                    "dbt-FF694B?logo=dbt&logoColor=white",
-                    "Snowflake-29B5E8?logo=snowflake&logoColor=white",
-                    "Databricks-FF3621?logo=databricks&logoColor=white",
-                    "Fabric-F25022?logo=microsoft&logoColor=white",
-                    "PostgreSQL-316192?logo=postgresql&logoColor=white",
-                    "MongoDB-47A248?logo=mongodb&logoColor=white",
-                    "PyTorch-EE4C2C?logo=pytorch&logoColor=white",
-                    "scikit_learn-F7931E?logo=scikitlearn&logoColor=white",
-                    "Power_BI-F2C811?logo=powerbi&logoColor=black",
-                    "Excel-217346?logo=microsoft-excel&logoColor=white"
-                ],
-                categories: [
-                    { title: "Languages", list: ["Python (Pandas, NumPy, FastAPI)", "SQL", "Java", "R"] },
-                    { title: "Data Stack", list: ["Spark (PySpark)", "Airflow", "Kafka", "dbt", "Snowflake", "Databricks", "Fabric", "PostgreSQL", "MongoDB"] },
-                    { title: "Cloud & ML", list: ["AWS", "Azure", "Docker", "Git", "CI/CD", "PyTorch", "Scikit-learn"] },
-                    { title: "Certifications", list: ["AWS Certified Cloud Practitioner", "Databricks Data Engineer Associate"] }
-                ]
-            },
+            skills: [
+                { category: "Programming Languages", list: "Python (Pandas, NumPy, FastAPI), SQL, Java, R" },
+                { category: "Data Stack", list: "Spark (PySpark), Airflow, Kafka, dbt, Snowflake, Databricks, Fabric, PostgreSQL, MongoDB" },
+                { category: "Cloud, ML & BI", list: "AWS, Azure, Docker, Git, CI/CD, PyTorch, Scikit-learn, Power BI, Excel" },
+                { category: "Certifications", list: "AWS Certified Cloud Practitioner, Databricks Certified Data Engineer Associate" }
+            ],
             experience: [
                 {
                     number: "01",
@@ -364,49 +329,47 @@
                     number: "01",
                     date: "AUG 2026 - Present",
                     status: "Incoming",
-                    role: "",
-                    degree: "Master of Science, Computer Science",
+                    degree: "Master of Science, Computer Science (Computing Systems)",
                     school: "Georgia Institute of Technology",
-                    desc: ["Specialization: Computing Systems"]
+                    desc: []
                 },
                 {
                     number: "02",
                     date: "AUG 2022 - JUN 2026",
                     status: "",
-                    degree: "B.Eng (Hons), Environmental Eng & Data Analytics",
+                    degree: "Bachelor of Engineering (Hons), Environmental Engineering and Data Analytics",
                     school: "National University of Singapore",
                     desc: [
                         "GPA: 4.46/5.0 (Distinction) | ASEAN Scholar",
-                        "Dissertation: Physics-Informed Machine Learning (Symbolic Regression) for Rainfall-Runoff Modelling",
-                        "Global Exposure: Exchange (University of Oulu, Finland), NOC (Kuala Lumpur), Impact Experience (Phnom Penh)",
-                        "Extracurriculars: Athlete (Intercollege & Interfaculty Games), Planning Committee (Asian Undergraduate Symposium & Amcisa Camp)"
+                        "Dissertation Project: Physics-Informed Machine Learning (Symbolic Regression) for Rainfall-Runoff Modelling",
+                        "Global Exposure: Student Exchange Programme (University of Oulu, Finland), NUS Overseas Colleges (Kuala Lumpur, Malaysia), Impact Experience Project (Phnom Penh, Cambodia)",
+                        "Extracurriculars: Athlete (Intercollege & Interfaculty Games), Planning Committee (Asian Undergraduate Symposium & Amcisa Orientation Camp)"
                     ]
                 }
             ],
             projects: [
                 {
-                    title: "Local Snowflake SQL Transpiler",
-                    desc: "Programmed a local Snowflake SQL execution environment using DuckDB and SQLGlot to enable fast, cost-free query testing.",
+                    title: "Local Snowflake SQL Transpiler (DuckDB, SQLGlot)",
+                    desc: "Programmed a local Snowflake SQL execution environment to enable fast, cost-free query testing",
                     link: "https://github.com/yihahn-pang/snowflake-project"
                 },
                 {
-                    title: "Real-Time Stock Streaming",
-                    desc: "Created a real-time stock trading simulator to stream and visualize high-frequency market data via Kafka, Docker, and Streamlit.",
+                    title: "Real-Time Stock Streaming Dashboard (Kafka, Docker, Streamlit)",
+                    desc: "Created a real-time stock trading simulator to stream and visualize high-frequency market data",
                     link: "https://github.com/yihahn-pang/kafka-project"
                 },
                 {
-                    title: "Weather Analytics ELT Pipeline",
-                    desc: "Engineered a cloud-native ELT pipeline leveraging AWS Lambda, S3, and Redshift to extract and analyze Singapore weather data.",
+                    title: "Weather Analytics ELT Pipeline (AWS Lambda, S3, Redshift)",
+                    desc: "Engineered a cloud-native ELT pipeline to extract, load, and analyze Singapore weather data",
                     link: "https://github.com/yihahn-pang/data-project"
                 },
                 {
-                    title: "SGX Derivatives CLI Tool",
-                    desc: "Built a Python CLI tool to automate SGX derivatives data retrieval with advanced retry logic, logging, and scheduling support.",
+                    title: "SGX Derivatives Data Downloader CLI (Python)",
+                    desc: "Built a CLI tool to automate SGX derivatives data retrieval with retry, logging, and scheduling support",
                     link: "https://github.com/yihahn-pang/sgx-project"
                 }
             ]
         };
-
 
         // ==========================================
         //  2. RENDERING LOGIC 
@@ -415,70 +378,64 @@
         function renderPortfolio() {
             // Render Socials
             const socialHTML = `
-                <a href="${portfolioData.socials.linkedin}" target="_blank" class="social-btn border border-white/20 rounded-full w-12 h-12 flex items-center justify-center text-lg" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                <a href="${portfolioData.socials.github}" target="_blank" class="social-btn border border-white/20 rounded-full w-12 h-12 flex items-center justify-center text-lg" title="GitHub"><i class="fab fa-github"></i></a>
-                <a href="${portfolioData.socials.email}" class="social-btn border border-white/20 rounded-full w-12 h-12 flex items-center justify-center text-lg" title="Email"><i class="fas fa-envelope"></i></a>
+                <a href="${portfolioData.socials.linkedin}" target="_blank" class="social-btn border border-white/30 rounded-full w-12 h-12 flex items-center justify-center text-lg" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="${portfolioData.socials.github}" target="_blank" class="social-btn border border-white/30 rounded-full w-12 h-12 flex items-center justify-center text-lg" title="GitHub"><i class="fab fa-github"></i></a>
+                <a href="${portfolioData.socials.email}" class="social-btn border border-white/30 rounded-full w-12 h-12 flex items-center justify-center text-lg" title="Email"><i class="fas fa-envelope"></i></a>
             `;
             document.getElementById('hero-socials').innerHTML = socialHTML;
 
-            // Render About
+            // Render About Bios
             const aboutHTML = `
-                <div class="space-y-4">
-                    <div class="flex items-center gap-3 mb-4">
-                        <i class="fas fa-terminal text-accent"></i>
-                        <h4 class="text-xl font-bold text-white uppercase tracking-wider">The Engineer</h4>
-                    </div>
-                    <p class="text-[1.05rem] font-light leading-relaxed text-gray-300">${portfolioData.about.engineer}</p>
+                <div class="space-y-6">
+                    <h4 class="text-2xl font-bold text-white border-l-4 border-white pl-4">The Engineer</h4>
+                    <p class="text-lg font-light leading-relaxed text-gray-200">${portfolioData.about.engineer}</p>
                 </div>
-                <div class="space-y-4">
-                    <div class="flex items-center gap-3 mb-4">
-                        <i class="fas fa-compass text-accent"></i>
-                        <h4 class="text-xl font-bold text-white uppercase tracking-wider">The Explorer</h4>
-                    </div>
-                    <p class="text-[1.05rem] font-light leading-relaxed text-gray-300">${portfolioData.about.explorer}</p>
+                <div class="space-y-6">
+                    <h4 class="text-2xl font-bold text-white border-l-4 border-white pl-4">The Explorer</h4>
+                    <p class="text-lg font-light leading-relaxed text-gray-200">${portfolioData.about.explorer}</p>
                 </div>
             `;
             document.getElementById('about-content').innerHTML = aboutHTML;
-
-            // Render Shields
-            const shieldsHTML = portfolioData.skills.badges.map(badge => 
-                `<img src="https://img.shields.io/badge/${badge}&style=for-the-badge" alt="skill badge">`
-            ).join('');
-            document.getElementById('shield-badges').innerHTML = shieldsHTML;
-
-            // Render Skill Categories
-            const categoriesHTML = portfolioData.skills.categories.map(cat => `
-                <div>
-                    <h5 class="text-accent font-bold text-sm uppercase tracking-widest mb-3 border-b border-white/10 pb-2">${cat.title}</h5>
-                    <ul class="space-y-2 text-sm text-gray-400 font-medium">
-                        ${cat.list.map(item => `<li>${item}</li>`).join('')}
-                    </ul>
+            
+            // Render Skills Section
+            const skillsHTML = `
+                <h4 class="text-2xl font-bold text-white border-l-4 border-white pl-4 mb-8">Technical Arsenal</h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    ${portfolioData.skills.map(skill => `
+                        <div>
+                            <h5 class="text-xs font-bold text-white/50 uppercase tracking-widest mb-2">${skill.category}</h5>
+                            <p class="text-gray-300 font-light leading-relaxed">${skill.list}</p>
+                        </div>
+                    `).join('')}
                 </div>
-            `).join('');
-            document.getElementById('skill-categories').innerHTML = categoriesHTML;
+            `;
+            document.getElementById('skills-content').innerHTML = skillsHTML;
 
             // Render Experience
             const expContainer = document.getElementById('experience-list');
             portfolioData.experience.forEach((job, index) => {
                 let descHTML = '';
                 if (Array.isArray(job.desc) && job.desc.length > 0) {
-                    descHTML = `<ul class="space-y-3 text-sm md:text-base text-gray-400 font-light leading-relaxed mt-4">
-                        ${job.desc.map(item => `<li class="flex gap-3"><span class="text-accent mt-1">▹</span><span>${item}</span></li>`).join('')}
+                    descHTML = `<ul class="space-y-4 text-gray-300 font-light leading-relaxed list-none">
+                        ${job.desc.map(item => `<li>&bull; ${item}</li>`).join('')}
                     </ul>`;
+                } else if (typeof job.desc === 'string' && job.desc.trim() !== '') {
+                    descHTML = `<p class="text-gray-300 font-light leading-relaxed">${job.desc}</p>`;
                 }
 
                 const delay = index * 100;
                 const html = `
-                <div class="glass-panel p-6 md:p-8 group reveal-on-scroll hover:bg-surface-hover transition-colors" style="transition-delay: ${delay}ms">
-                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-2">
-                        <h4 class="text-2xl font-bold text-white group-hover:text-accent transition-colors">${job.role}</h4>
-                        <div class="flex flex-col items-end">
-                            <span class="text-sm font-mono text-gray-400 mt-2 md:mt-0">${job.date}</span>
-                            ${job.status ? `<span class="text-[10px] font-bold text-accent px-2 py-1 bg-accent/10 rounded mt-1 uppercase tracking-widest">${job.status}</span>` : ''}
-                        </div>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6 group reveal-on-scroll" style="transition-delay: ${delay}ms">
+                    <div class="md:col-span-1 relative">
+                        <span class="text-5xl font-black opacity-10 group-hover:opacity-40 transition-opacity">${job.number}</span>
+                        <div class="text-sm font-bold mt-2">${job.date}</div>
+                        ${job.status ? `<div class="text-xs font-bold text-blue-400 opacity-80 uppercase tracking-widest mt-1">${job.status}</div>` : ''}
                     </div>
-                    <div class="text-lg font-medium text-gray-300 mb-2">${job.company}</div>
-                    ${descHTML}
+                    <div class="md:col-span-3 hover:bg-white/5 p-6 rounded-lg transition-colors border border-transparent hover:border-white/10">
+                        <h4 class="text-3xl font-bold mb-1">${job.role}</h4>
+                        <div class="text-lg font-light mb-6 opacity-80 text-gray-300">${job.company}</div>
+                        ${descHTML}
+                    </div>
                 </div>`;
                 expContainer.innerHTML += html;
             });
@@ -488,23 +445,24 @@
             portfolioData.education.forEach((edu, index) => {
                 let descHTML = '';
                 if (Array.isArray(edu.desc) && edu.desc.length > 0) {
-                    descHTML = `<ul class="space-y-3 text-sm md:text-base text-gray-400 font-light leading-relaxed mt-4">
-                        ${edu.desc.map(item => `<li class="flex gap-3"><span class="text-accent mt-1">▹</span><span>${item}</span></li>`).join('')}
+                    descHTML = `<ul class="space-y-4 text-gray-300 font-light leading-relaxed list-none">
+                        ${edu.desc.map(item => `<li>&bull; ${item}</li>`).join('')}
                     </ul>`;
                 }
 
                 const delay = index * 100;
                 const html = `
-                <div class="glass-panel p-6 md:p-8 group reveal-on-scroll hover:bg-surface-hover transition-colors" style="transition-delay: ${delay}ms">
-                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-2">
-                        <h4 class="text-2xl font-bold text-white group-hover:text-accent transition-colors">${edu.school}</h4>
-                        <div class="flex flex-col items-end">
-                            <span class="text-sm font-mono text-gray-400 mt-2 md:mt-0">${edu.date}</span>
-                            ${edu.status ? `<span class="text-[10px] font-bold text-accent px-2 py-1 bg-accent/10 rounded mt-1 uppercase tracking-widest">${edu.status}</span>` : ''}
-                        </div>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6 group reveal-on-scroll" style="transition-delay: ${delay}ms">
+                    <div class="md:col-span-1 relative">
+                        <span class="text-5xl font-black opacity-10 group-hover:opacity-40 transition-opacity">${edu.number}</span>
+                        <div class="text-sm font-bold mt-2">${edu.date}</div>
+                        ${edu.status ? `<div class="text-xs font-bold text-blue-400 opacity-80 uppercase tracking-widest mt-1">${edu.status}</div>` : ''}
                     </div>
-                    <div class="text-lg font-medium text-gray-300 mb-2">${edu.degree}</div>
-                    ${descHTML}
+                    <div class="md:col-span-3 hover:bg-white/5 p-6 rounded-lg transition-colors border border-transparent hover:border-white/10">
+                        <h4 class="text-3xl font-bold mb-1">${edu.degree}</h4>
+                        <div class="text-lg font-light mb-6 opacity-80 text-gray-300">${edu.school}</div>
+                        ${descHTML}
+                    </div>
                 </div>`;
                 eduContainer.innerHTML += html;
             });
@@ -514,15 +472,16 @@
             portfolioData.projects.forEach((proj, index) => {
                 const delay = index * 100;
                 const html = `
-                <a href="${proj.link}" target="_blank" class="tilt-card block h-full glass-panel p-8 reveal-on-scroll group" style="transition-delay: ${delay}ms">
-                    <div class="flex flex-col justify-between h-full relative z-10">
+                <a href="${proj.link}" target="_blank" class="tilt-card block h-full bg-white/5 p-8 border border-white/10 hover:border-white/50 rounded-sm reveal-on-scroll" style="transition-delay: ${delay}ms">
+                    <div class="flex flex-col justify-between h-full">
                         <div>
                             <div class="flex justify-between items-start mb-4">
-                                <i class="far fa-folder-open text-3xl text-accent"></i>
-                                <i class="fab fa-github text-xl text-gray-400 group-hover:text-white transition-colors"></i>
+                                <h4 class="text-2xl font-bold">${proj.title}</h4>
                             </div>
-                            <h4 class="text-xl font-bold mb-3 text-gray-100 group-hover:text-accent transition-colors">${proj.title}</h4>
-                            <p class="text-sm text-gray-400 font-light leading-relaxed mb-6">${proj.desc}</p>
+                            <p class="text-gray-400 font-light mb-6">${proj.desc}</p>
+                        </div>
+                        <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-white/60 group-hover:text-white transition-colors">
+                            <span>View Code</span>
                         </div>
                     </div>
                 </a>`;
@@ -538,13 +497,13 @@
 
         function scrollToSection(id) {
             const el = document.getElementById(id);
-            if (el) window.scrollTo({ top: el.offsetTop - 80, behavior: 'smooth' });
+            if (el) window.scrollTo({ top: el.offsetTop, behavior: 'smooth' });
         }
 
-        // Snow/Particle Canvas Setup
+        // Snow Canvas Setup
         const canvas = document.getElementById('snow-canvas');
         const ctx = canvas.getContext('2d');
-        let width, height, particles = [];
+        let width, height, snowflakes = [];
 
         function resizeAndInit() {
             width = window.innerWidth;
@@ -552,53 +511,46 @@
             canvas.width = width;
             canvas.height = height;
             
-            particles = [];
-            for (let i = 0; i < 70; i++) {
-                particles.push({
+            snowflakes = [];
+            for (let i = 0; i < 100; i++) {
+                snowflakes.push({
                     x: Math.random() * width,
                     y: Math.random() * height,
-                    radius: Math.random() * 1.5 + 0.5,
-                    speedY: Math.random() * 0.5 + 0.1,
-                    speedX: Math.random() * 0.5 - 0.25,
-                    opacity: Math.random() * 0.5 + 0.1
+                    radius: Math.random() * 2 + 1,
+                    speed: Math.random() * 1 + 0.5,
+                    wind: Math.random() * 0.5 - 0.25
                 });
             }
         }
 
-        function drawParticles() {
+        function drawSnow() {
             ctx.clearRect(0, 0, width, height);
-            for (let p of particles) {
-                ctx.fillStyle = `rgba(148, 163, 184, ${p.opacity})`;
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-                ctx.fill();
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
+            ctx.beginPath();
+            for (let flake of snowflakes) {
+                ctx.moveTo(flake.x, flake.y);
+                ctx.arc(flake.x, flake.y, flake.radius, 0, Math.PI * 2);
                 
-                p.y -= p.speedY; // Floating up instead of snowing down for a tech vibe
-                p.x += p.speedX;
-                
-                if (p.y < 0) {
-                    p.y = height;
-                    p.x = Math.random() * width;
-                }
-                if (p.x > width || p.x < 0) {
-                    p.speedX = -p.speedX;
+                flake.y += flake.speed;
+                flake.x += flake.wind;
+                if (flake.y > height) {
+                    flake.y = 0;
+                    flake.x = Math.random() * width;
                 }
             }
-            requestAnimationFrame(drawParticles);
+            ctx.fill();
+            requestAnimationFrame(drawSnow);
         }
 
         window.addEventListener('resize', resizeAndInit);
         resizeAndInit();
-        drawParticles();
+        drawSnow();
 
         // Intersection Observer for scroll reveal
         document.addEventListener('DOMContentLoaded', () => {
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('is-visible');
-                        observer.unobserve(entry.target); // Run once
-                    }
+                    if (entry.isIntersecting) entry.target.classList.add('is-visible');
                 });
             }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
             
@@ -611,8 +563,8 @@
                 const rect = card.getBoundingClientRect();
                 const x = e.clientX - rect.left;
                 const y = e.clientY - rect.top;
-                const rotateX = ((y - rect.height / 2) / (rect.height / 2)) * -4;
-                const rotateY = ((x - rect.width / 2) / (rect.width / 2)) * 4;
+                const rotateX = ((y - rect.height / 2) / (rect.height / 2)) * -5;
+                const rotateY = ((x - rect.width / 2) / (rect.width / 2)) * 5;
                 card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
             });
             card.addEventListener('mouseleave', () => {
