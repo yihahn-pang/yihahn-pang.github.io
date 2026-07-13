@@ -6,622 +6,131 @@
     <title>Yi Hahn Pang | Portfolio</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 
-    <script>
-        tailwind.config = {
-            theme: {
-                fontFamily: {
-                    sans: ['"Montserrat"', 'sans-serif'],
-                },
-                extend: {
-                    colors: {
-                        'accent': '#ffffff', 
-                    },
-                    letterSpacing: {
-                        'tightest': '-0.05em',
-                        'widest': '0.2em',
-                    },
-                    animation: {
-                        'float': 'float 6s ease-in-out infinite',
-                        'slide-in-left': 'slideInLeft 1s ease-out forwards',
-                        'slide-in-right': 'slideInRight 1s ease-out forwards',
-                        'fade-in-up': 'fadeInUp 0.5s ease-out forwards',
-                    },
-                    keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-15px)' },
-                        },
-                        slideInLeft: {
-                            '0%': { opacity: '0', transform: 'translateX(-50px)' },
-                            '100%': { opacity: '1', transform: 'translateX(0)' },
-                        },
-                        slideInRight: {
-                            '0%': { opacity: '0', transform: 'translateX(50px)' },
-                            '100%': { opacity: '1', transform: 'translateX(0)' },
-                        },
-                        fadeInUp: {
-                            '0%': { opacity: '0', transform: 'translateY(20px)' },
-                            '100%': { opacity: '1', transform: 'translateY(0)' },
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-    
     <style>
-        body {
-            background-color: #0f172a;
-            color: #f8fafc;
-            overflow-x: hidden;
-            cursor: default;
-        }
-
-        /* --- Background Wrapper --- */
-        .bg-fixed-wrapper {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -3;
-            overflow: hidden;
-        }
+        body { background-color: #0f172a; color: #f8fafc; overflow-x: hidden; cursor: default; }
+        .bg-fixed-wrapper { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -3; overflow: hidden; }
+        #snow-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; pointer-events: none; }
+        .bg-image { width: 100%; height: 100%; object-fit: cover; background-image: url('background.jpg'); background-size: cover; background-position: center; }
+        .bg-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to right, rgba(15, 23, 42, 0.9) 0%, rgba(15, 23, 42, 0.6) 50%, rgba(15, 23, 42, 0.3) 100%); z-index: -1; pointer-events: none; }
         
-        #snow-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
-            pointer-events: none;
-        }
-        
-        .bg-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            background-image: url('background.jpg');
-            background-size: cover;
-            background-position: center;
-        }
-        
-        .bg-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to right, rgba(15, 23, 42, 0.9) 0%, rgba(15, 23, 42, 0.6) 50%, rgba(15, 23, 42, 0.3) 100%);
-            z-index: -1;
-            pointer-events: none;
-        }
-
-        /* Hide scrollbar for the tab buttons menu on mobile */
-        .hide-scroll::-webkit-scrollbar {
-            display: none;
-        }
-        .hide-scroll {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
-
-        /* Tab Buttons */
-        .tab-btn {
-            position: relative;
-            transition: all 0.3s ease;
-        }
-        .tab-content {
-            display: none;
-            animation: fadeInUp 0.4s ease-out forwards;
-        }
-
-        .reveal-on-scroll {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s cubic-bezier(0.5, 0, 0, 1);
-        }
-        .reveal-on-scroll.is-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .tilt-card {
-            transition: transform 0.1s ease, box-shadow 0.3s ease;
-            transform-style: preserve-3d;
-        }
-        .tilt-card:hover {
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-            z-index: 10;
-        }
-
-        .social-btn {
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-        .social-btn::before {
-            content: '';
-            position: absolute;
-            top: 100%;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: white;
-            transition: top 0.3s ease;
-            z-index: -1;
-        }
-        .social-btn:hover::before {
-            top: 0;
-        }
-        .social-btn:hover {
-            color: #0f172a;
-        }
+        .tab-content { display: none; animation: fadeInUp 0.4s ease-out forwards; }
+        .reveal-on-scroll { opacity: 0; transform: translateY(30px); transition: all 0.6s cubic-bezier(0.5, 0, 0, 1); }
+        .reveal-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
+        .tilt-card { transition: transform 0.1s ease, box-shadow 0.3s ease; transform-style: preserve-3d; }
+        .tilt-card:hover { box-shadow: 0 20px 40px rgba(0,0,0,0.4); z-index: 10; }
+        .social-btn:hover { color: #0f172a; background: white; }
     </style>
 </head>
 <body class="antialiased selection:bg-white selection:text-black">
 
-    <div class="bg-fixed-wrapper">
-        <div id="parallax-bg" class="bg-image"></div>
-    </div>
+    <div class="bg-fixed-wrapper"><div id="parallax-bg" class="bg-image"></div></div>
     <canvas id="snow-canvas"></canvas>
     <div class="bg-overlay"></div>
 
     <!-- Hero Section -->
-    <section id="hero" class="min-h-[90vh] flex items-center relative px-6 md:px-20 overflow-hidden">
+    <section id="hero" class="min-h-[80vh] flex items-center relative px-6 md:px-20 overflow-hidden">
         <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            
-            <div class="text-white z-10 space-y-8 opacity-0 animate-slide-in-left" style="animation-delay: 0.2s; animation-fill-mode: forwards;">
-                <div>
-                    <h1 class="text-6xl md:text-8xl font-black leading-none tracking-tightest mb-6 drop-shadow-2xl">
-                        YI HAHN <br> PANG
-                    </h1>
-                    <div class="h-1 w-24 bg-white mb-6"></div>
-                </div>
-
-                <div class="flex gap-4 pt-4" id="hero-socials">
-                </div>
-            </div>
-
-            <div class="flex justify-center md:justify-end z-10 order-first md:order-last mb-8 md:mb-0 opacity-0 animate-slide-in-right" style="animation-delay: 0.5s; animation-fill-mode: forwards;">
-                <div class="w-80 h-80 md:w-[28rem] md:h-[28rem] relative animate-float">
-                    <div class="absolute inset-0 border-2 border-white/30 transform translate-x-6 translate-y-6"></div>
-                    <img src="profile.jpg" alt="Profile" class="w-full h-full object-cover shadow-2xl relative z-10 transition-all duration-700">
-                </div>
+            <div class="text-white z-10 space-y-8 animate-fade-in-up">
+                <h1 class="text-6xl md:text-8xl font-black leading-none tracking-tightest mb-6">YI HAHN <br> PANG</h1>
+                <div class="h-1 w-24 bg-white mb-6"></div>
+                <div class="flex gap-4" id="hero-socials"></div>
             </div>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="py-20 px-6 md:px-20 relative">
+    <!-- About -->
+    <section id="about" class="py-16 px-6 md:px-20">
         <div class="max-w-6xl mx-auto reveal-on-scroll">
-            <h3 class="text-sm font-bold tracking-widest uppercase mb-12 text-white/50 text-center">About</h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-16" id="about-content">
-                <!-- Bio loaded here -->
-            </div>
+            <h3 class="text-xs font-bold tracking-widest uppercase mb-12 text-white/40 text-center">About</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16" id="about-content"></div>
         </div>
     </section>
 
-    <!-- Resume Tabs Navigation (Full-width Blurry Block) -->
-    <section id="resume-tabs" class="pt-8 pb-0 px-6 md:px-20 bg-black/40 backdrop-blur-md border-y border-white/10 sticky top-0 z-40">
-        <div class="max-w-6xl mx-auto flex gap-6 md:gap-10 text-xs md:text-sm font-bold tracking-widest uppercase overflow-x-auto whitespace-nowrap hide-scroll">
-            <button onclick="switchTab('experience')" id="tab-btn-experience" class="tab-btn pb-4 border-b-2 border-transparent text-white/50 hover:text-white">Experience</button>
-            <button onclick="switchTab('skills')" id="tab-btn-skills" class="tab-btn pb-4 border-b-2 border-transparent text-white/50 hover:text-white">Skills</button>
-            <button onclick="switchTab('projects')" id="tab-btn-projects" class="tab-btn pb-4 border-b-2 border-transparent text-white/50 hover:text-white">Projects</button>
-            <button onclick="switchTab('education')" id="tab-btn-education" class="tab-btn pb-4 border-b-2 border-transparent text-white/50 hover:text-white">Education</button>
+    <!-- Clean Tab Navigation (No background, not sticky) -->
+    <section id="resume-tabs" class="py-10 px-6 md:px-20 flex justify-center">
+        <div class="flex flex-wrap justify-center gap-8 md:gap-12 text-xs font-bold tracking-widest uppercase text-white/40">
+            <button onclick="switchTab('experience')" id="tab-btn-experience" class="tab-btn hover:text-white transition-colors">Experience</button>
+            <button onclick="switchTab('skills')" id="tab-btn-skills" class="tab-btn hover:text-white transition-colors">Skills</button>
+            <button onclick="switchTab('projects')" id="tab-btn-projects" class="tab-btn hover:text-white transition-colors">Projects</button>
+            <button onclick="switchTab('education')" id="tab-btn-education" class="tab-btn hover:text-white transition-colors">Education</button>
         </div>
     </section>
 
-    <!-- Tab Contents Container -->
-    <div class="pb-24 pt-12 min-h-[60vh] relative">
-        
-        <!-- Experience Tab -->
-        <section id="experience" class="tab-content px-6 md:px-20">
-            <div class="max-w-5xl mx-auto space-y-6" id="experience-list"></div>
-        </section>
-
-        <!-- Skills Tab -->
-        <section id="skills" class="tab-content px-6 md:px-20">
-            <div class="max-w-5xl mx-auto" id="skills-content"></div>
-        </section>
-
-        <!-- Projects Tab -->
-        <section id="projects" class="tab-content px-6 md:px-20">
-            <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8" id="projects-list"></div>
-        </section>
-
-        <!-- Education Tab -->
-        <section id="education" class="tab-content px-6 md:px-20">
-            <div class="max-w-5xl mx-auto space-y-6" id="education-list"></div>
-        </section>
-        
+    <!-- Tab Contents -->
+    <div class="pb-24 min-h-[50vh]">
+        <section id="experience" class="tab-content px-6 md:px-20"><div class="max-w-5xl mx-auto space-y-6" id="experience-list"></div></section>
+        <section id="skills" class="tab-content px-6 md:px-20"><div class="max-w-5xl mx-auto" id="skills-content"></div></section>
+        <section id="projects" class="tab-content px-6 md:px-20"><div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8" id="projects-list"></div></section>
+        <section id="education" class="tab-content px-6 md:px-20"><div class="max-w-5xl mx-auto space-y-6" id="education-list"></div></section>
     </div>
 
-    <!-- Footer -->
-    <footer class="py-20 text-center opacity-40">
-        <p class="text-xs font-bold tracking-widest uppercase">&copy; Jul 2026 Yi Hahn Pang</p>
-    </footer>
+    <footer class="py-12 text-center opacity-30 text-xs font-bold tracking-widest uppercase">&copy; Jul 2026 Yi Hahn Pang</footer>
 
     <script>
-        // ==========================================
-        //  1. PORTFOLIO CONTENT 
-        // ==========================================
-        
         const portfolioData = {
-            socials: {
-                email: "mailto:yihahn.pang@gmail.com",
-                linkedin: "https://linkedin.com/in/yihahn-pang",
-                github: "https://github.com/yihahn-pang"
-            },
+            socials: { email: "mailto:yihahn.pang@gmail.com", linkedin: "https://linkedin.com/in/yihahn-pang", github: "https://github.com/yihahn-pang" },
             about: {
                 engineer: `Hey there, I am Yi Hahn! <br><br> I specialize in data engineering, analytics, and machine learning. My career goal is to be the "day-tuh" guy who builds scalable, structured data systems for an AI-driven world.`,
                 explorer: `I’m a certified climber and diver, so if you’re planning any high-mountain hikes or deep-sea adventures, please "jio" me! <br><br> I also casually play basketball and other ball games. When I’m not balling, you’ll probably find me enjoying sushi, pizza or roti prata.`
             },
             skills: [
-                { 
-                    category: "Programming Languages", 
-                    items: ["Python (Pandas, NumPy, FastAPI)", "SQL", "Java", "R"] 
-                },
-                { 
-                    category: "Data Stack", 
-                    items: ["Spark (PySpark)", "Airflow", "Kafka", "dbt", "Snowflake", "Databricks", "Fabric", "PostgreSQL", "MongoDB"] 
-                },
-                { 
-                    category: "Cloud, ML & BI", 
-                    items: ["AWS", "Azure", "Docker", "Git", "CI/CD", "PyTorch", "Scikit-learn", "Power BI", "Excel"] 
-                },
-                { 
-                    category: "Certifications", 
-                    items: [
-                        "<a href='https://www.credly.com/badges/bba4abd9-81f5-4ed4-a6aa-f4015365b16c/linked_in_profile' target='_blank'>AWS Certified Cloud Practitioner <i class='fas fa-external-link-alt ml-1 opacity-70 text-[10px]'></i></a>", 
-                        "<a href='https://credentials.databricks.com/a02dda1d-38d4-4603-8807-9d2133eec2f2#acc.Hrl34Xas' target='_blank'>Databricks Certified Data Engineer Associate <i class='fas fa-external-link-alt ml-1 opacity-70 text-[10px]'></i></a>"
-                    ] 
-                }
+                { category: "Programming Languages", items: ["Python (Pandas, NumPy, FastAPI)", "SQL", "Java", "R"] },
+                { category: "Data Stack", items: ["Spark (PySpark)", "Airflow", "Kafka", "dbt", "Snowflake", "Databricks", "Fabric", "PostgreSQL", "MongoDB"] },
+                { category: "Cloud, ML & BI", items: ["AWS", "Azure", "Docker", "Git", "CI/CD", "PyTorch", "Scikit-learn", "Power BI", "Excel"] },
+                { category: "Certifications", items: ["AWS Certified Cloud Practitioner", "Databricks Certified Data Engineer Associate"] }
             ],
             experience: [
-                {
-                    number: "01",
-                    date: "JUL 2026 - Present",
-                    status: "",
-                    role: "Data Analytics Engineer, Operation Intelligence",
-                    company: "Micron Technology",
-                    desc: []
-                },
-                {
-                    number: "02",
-                    date: "JAN 2026 - MAY 2026",
-                    status: "",
-                    role: "Data Engineer Intern",
-                    company: "Climate Impact X",
-                    desc: [
-                        "Led migration of legacy SQL pipelines to dbt and implemented materialization strategy to optimize Snowflake compute performance, reducing runtime by 86% (from 66 to 9 mins)",
-                        "Developed dbt tests and monitoring dashboards to visualize data pipeline health, flagging 7 major SQL logic errors",
-                        "Piloted Microsoft Fabric Data Agent to translate natural language into database queries, optimizing semantic context and capacity cost"
-                    ]
-                },
-                {
-                    number: "03",
-                    date: "JAN 2025 - JUN 2025",
-                    status: "",
-                    role: "Data Engineer Intern",
-                    company: "Climate Impact X",
-                    desc: [
-                        "Built 18 automated ETL pipelines (Airflow, PySpark, Azure) to ingest multi-source data into Snowflake and MongoDB, saving 10+ manual hours weekly",
-                        "Refactored Snowflake schema into medallion architecture to consolidate 40+ views, improving data lineage and fixing schema redundancies",
-                        "Engineered 2 CI/CD pipelines (Bash, Azure DevOps) to automate cloud deployments, ensuring environment parity"
-                    ]
-                },
-                {
-                    number: "04",
-                    date: "MAY 2024 - AUG 2024",
-                    status: "",
-                    role: "Environmental Engineer Intern",
-                    company: "Carbon GPT",
-                    desc: [
-                        "Built 4 LLM prototypes (Streamlit, Groq API) to automate tasks, supporting pitches to UOB, CIMB, and Bursa",
-                        "Developed ETL pipeline (Python, PostgreSQL) to process 1.5M+ records, optimizing database scalability"
-                    ]
-                }
+                { number: "01", date: "JUL 2026 - Present", role: "Data Analytics Engineer, Operation Intelligence", company: "Micron Technology", desc: [] },
+                { number: "02", date: "JAN 2026 - MAY 2026", role: "Data Engineer Intern", company: "Climate Impact X", desc: ["Led migration of legacy SQL pipelines to dbt and implemented materialization strategy to optimize Snowflake compute performance, reducing runtime by 86% (from 66 to 9 mins)", "Developed dbt tests and monitoring dashboards to visualize data pipeline health, flagging 7 major SQL logic errors", "Piloted Microsoft Fabric Data Agent to translate natural language into database queries, optimizing semantic context and capacity cost"] },
+                { number: "03", date: "JAN 2025 - JUN 2025", role: "Data Engineer Intern", company: "Climate Impact X", desc: ["Built 18 automated ETL pipelines (Airflow, PySpark, Azure) to ingest multi-source data into Snowflake and MongoDB, saving 10+ manual hours weekly", "Refactored Snowflake schema into medallion architecture to consolidate 40+ views, improving data lineage and fixing schema redundancies", "Engineered 2 CI/CD pipelines (Bash, Azure DevOps) to automate cloud deployments, ensuring environment parity"] },
+                { number: "04", date: "MAY 2024 - AUG 2024", role: "Environmental Engineer Intern", company: "Carbon GPT", desc: ["Built 4 LLM prototypes (Streamlit, Groq API) to automate tasks, supporting pitches to UOB, CIMB, and Bursa", "Developed ETL pipeline (Python, PostgreSQL) to process 1.5M+ records, optimizing database scalability"] }
             ],
             education: [
-                {
-                    number: "01",
-                    date: "AUG 2026 - Present",
-                    status: "",
-                    degree: "Master of Science, Computer Science (Computing Systems)",
-                    school: "Georgia Institute of Technology",
-                    desc: []
-                },
-                {
-                    number: "02",
-                    date: "AUG 2022 - JUN 2026",
-                    status: "",
-                    degree: "Bachelor of Engineering (Hons), Environmental Engineering and Data Analytics",
-                    school: "National University of Singapore",
-                    desc: [
-                        "GPA: 4.46/5.0 (Distinction) | ASEAN Scholar",
-                        "Dissertation Project: Physics-Informed Machine Learning (Symbolic Regression) for Rainfall-Runoff Modelling"
-                    ]
-                }
+                { number: "01", date: "AUG 2026 - Present", degree: "Master of Science, Computer Science (Computing Systems)", school: "Georgia Institute of Technology", desc: [] },
+                { number: "02", date: "AUG 2022 - JUN 2026", degree: "Bachelor of Engineering (Hons), Environmental Engineering and Data Analytics", school: "National University of Singapore", desc: ["GPA: 4.46/5.0 (Distinction) | ASEAN Scholar", "Dissertation Project: Physics-Informed Machine Learning (Symbolic Regression) for Rainfall-Runoff Modelling"] }
             ],
             projects: [
-                {
-                    title: "Local Snowflake SQL Transpiler (DuckDB, SQLGlot)",
-                    desc: "Programmed a local Snowflake SQL execution environment to enable fast, cost-free query testing",
-                    link: "https://github.com/yihahn-pang/snowflake-project"
-                },
-                {
-                    title: "Real-Time Stock Streaming Dashboard (Kafka, Docker, Streamlit)",
-                    desc: "Created a real-time stock trading simulator to stream and visualize high-frequency market data",
-                    link: "https://github.com/yihahn-pang/kafka-project"
-                },
-                {
-                    title: "Weather Analytics ELT Pipeline (AWS Lambda, S3, Redshift)",
-                    desc: "Engineered a cloud-native ELT pipeline to extract, load, and analyze Singapore weather data",
-                    link: "https://github.com/yihahn-pang/data-project"
-                },
-                {
-                    title: "SGX Derivatives Data Downloader CLI (Python)",
-                    desc: "Built a CLI tool to automate SGX derivatives data retrieval with retry, logging, and scheduling support",
-                    link: "https://github.com/yihahn-pang/sgx-project"
-                }
+                { title: "Local Snowflake SQL Transpiler (DuckDB, SQLGlot)", desc: "Programmed a local Snowflake SQL execution environment to enable fast, cost-free query testing", link: "https://github.com/yihahn-pang/snowflake-project" },
+                { title: "Real-Time Stock Streaming Dashboard (Kafka, Docker, Streamlit)", desc: "Created a real-time stock trading simulator to stream and visualize high-frequency market data", link: "https://github.com/yihahn-pang/kafka-project" },
+                { title: "Weather Analytics ELT Pipeline (AWS Lambda, S3, Redshift)", desc: "Engineered a cloud-native ELT pipeline to extract, load, and analyze Singapore weather data", link: "https://github.com/yihahn-pang/data-project" },
+                { title: "SGX Derivatives Data Downloader CLI (Python)", desc: "Built a CLI tool to automate SGX derivatives data retrieval with retry, logging, and scheduling support", link: "https://github.com/yihahn-pang/sgx-project" }
             ]
         };
 
-        // ==========================================
-        //  2. RENDERING LOGIC 
-        // ==========================================
-
         function renderPortfolio() {
-            const socialHTML = `
+            document.getElementById('hero-socials').innerHTML = `
                 <a href="${portfolioData.socials.email}" class="social-btn border border-white/30 rounded-full w-12 h-12 flex items-center justify-center text-lg" title="Email"><i class="fas fa-envelope"></i></a>
                 <a href="${portfolioData.socials.linkedin}" target="_blank" class="social-btn border border-white/30 rounded-full w-12 h-12 flex items-center justify-center text-lg" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                 <a href="${portfolioData.socials.github}" target="_blank" class="social-btn border border-white/30 rounded-full w-12 h-12 flex items-center justify-center text-lg" title="GitHub"><i class="fab fa-github"></i></a>
             `;
-            document.getElementById('hero-socials').innerHTML = socialHTML;
-
-            // Render About Bios
-            const aboutHTML = `
-                <div class="space-y-6">
-                    <h4 class="text-2xl font-bold text-white border-l-4 border-white pl-4">The Engineer</h4>
-                    <p class="text-lg font-light leading-relaxed text-gray-200">${portfolioData.about.engineer}</p>
-                </div>
-                <div class="space-y-6">
-                    <h4 class="text-2xl font-bold text-white border-l-4 border-white pl-4">The Explorer</h4>
-                    <p class="text-lg font-light leading-relaxed text-gray-200">${portfolioData.about.explorer}</p>
-                </div>
-            `;
-            document.getElementById('about-content').innerHTML = aboutHTML;
-            
-            // Render Skills
-            const skillsHTML = `
-                <div class="space-y-8">
-                    ${portfolioData.skills.map((skill, index) => {
-                        const delay = index * 100;
-                        return `
-                        <div class="hover:bg-white/5 p-6 md:p-8 rounded-lg transition-colors border border-transparent hover:border-white/10 reveal-on-scroll" style="transition-delay: ${delay}ms">
-                            <h4 class="text-3xl font-bold mb-6">${skill.category}</h4>
-                            <div class="flex flex-wrap gap-3">
-                                ${skill.items.map(item => `
-                                    <span class="px-4 py-2 bg-white/10 rounded-md text-sm font-medium text-gray-200 border border-white/5 shadow-sm hover:bg-white/20 transition-colors">
-                                        ${item}
-                                    </span>
-                                `).join('')}
-                            </div>
-                        </div>
-                        `;
-                    }).join('')}
-                </div>
-            `;
-            document.getElementById('skills-content').innerHTML = skillsHTML;
-
-            // Render Experience
-            const expContainer = document.getElementById('experience-list');
-            portfolioData.experience.forEach((job) => {
-                let descHTML = '';
-                if (Array.isArray(job.desc) && job.desc.length > 0) {
-                    descHTML = `<ul class="space-y-4 text-gray-300 font-light leading-relaxed list-none">
-                        ${job.desc.map(item => `<li>&bull; ${item}</li>`).join('')}
-                    </ul>`;
-                } else if (typeof job.desc === 'string' && job.desc.trim() !== '') {
-                    descHTML = `<p class="text-gray-300 font-light leading-relaxed">${job.desc}</p>`;
-                }
-
-                const html = `
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-6 group reveal-on-scroll">
-                    <div class="md:col-span-1 relative pt-6 pl-6">
-                        <span class="text-5xl font-black opacity-10 group-hover:opacity-40 transition-opacity">${job.number}</span>
-                        <div class="text-sm font-bold mt-2">${job.date}</div>
-                        ${job.status ? `<div class="text-xs font-bold text-blue-400 opacity-80 uppercase tracking-widest mt-1">${job.status}</div>` : ''}
-                    </div>
-                    <div class="md:col-span-3 hover:bg-white/5 p-6 rounded-lg transition-colors border border-transparent hover:border-white/10">
-                        <h4 class="text-3xl font-bold mb-1">${job.role}</h4>
-                        <div class="text-lg font-light mb-6 opacity-80 text-gray-300">${job.company}</div>
-                        ${descHTML}
-                    </div>
-                </div>`;
-                expContainer.innerHTML += html;
-            });
-
-            // Render Education
-            const eduContainer = document.getElementById('education-list');
-            portfolioData.education.forEach((edu) => {
-                let descHTML = '';
-                if (Array.isArray(edu.desc) && edu.desc.length > 0) {
-                    descHTML = `<ul class="space-y-4 text-gray-300 font-light leading-relaxed list-none">
-                        ${edu.desc.map(item => `<li>&bull; ${item}</li>`).join('')}
-                    </ul>`;
-                }
-
-                const html = `
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-6 group reveal-on-scroll">
-                    <div class="md:col-span-1 relative pt-6 pl-6">
-                        <span class="text-5xl font-black opacity-10 group-hover:opacity-40 transition-opacity">${edu.number}</span>
-                        <div class="text-sm font-bold mt-2">${edu.date}</div>
-                        ${edu.status ? `<div class="text-xs font-bold text-blue-400 opacity-80 uppercase tracking-widest mt-1">${edu.status}</div>` : ''}
-                    </div>
-                    <div class="md:col-span-3 hover:bg-white/5 p-6 rounded-lg transition-colors border border-transparent hover:border-white/10">
-                        <h4 class="text-3xl font-bold mb-1">${edu.degree}</h4>
-                        <div class="text-lg font-light mb-6 opacity-80 text-gray-300">${edu.school}</div>
-                        ${descHTML}
-                    </div>
-                </div>`;
-                eduContainer.innerHTML += html;
-            });
-
-            // Render Projects
-            const projContainer = document.getElementById('projects-list');
-            portfolioData.projects.forEach((proj) => {
-                const html = `
-                <a href="${proj.link}" target="_blank" class="tilt-card block h-full bg-white/5 p-8 border border-white/10 hover:border-white/50 rounded-sm reveal-on-scroll">
-                    <div class="flex flex-col justify-between h-full">
-                        <div>
-                            <div class="flex justify-between items-start mb-4">
-                                <h4 class="text-2xl font-bold">${proj.title}</h4>
-                            </div>
-                            <p class="text-gray-400 font-light mb-6">${proj.desc}</p>
-                        </div>
-                        <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-white/60 group-hover:text-white transition-colors">
-                            <span>View Code</span>
-                        </div>
-                    </div>
-                </a>`;
-                projContainer.innerHTML += html;
-            });
+            document.getElementById('about-content').innerHTML = `<div class="space-y-6"><h4 class="text-2xl font-bold border-l-4 border-white pl-4">The Engineer</h4><p class="text-lg font-light text-gray-200">${portfolioData.about.engineer}</p></div><div class="space-y-6"><h4 class="text-2xl font-bold border-l-4 border-white pl-4">The Explorer</h4><p class="text-lg font-light text-gray-200">${portfolioData.about.explorer}</p></div>`;
+            document.getElementById('skills-content').innerHTML = `<div class="space-y-8">${portfolioData.skills.map(s => `<div class="hover:bg-white/5 p-6 rounded-lg transition-colors border border-transparent hover:border-white/10 reveal-on-scroll"><h4 class="text-3xl font-bold mb-6">${s.category}</h4><div class="flex flex-wrap gap-3">${s.items.map(i => `<span class="px-4 py-2 bg-white/5 rounded-md text-sm font-medium border border-white/5">${i}</span>`).join('')}</div></div>`).join('')}</div>`;
+            portfolioData.experience.forEach((job) => { document.getElementById('experience-list').innerHTML += `<div class="grid grid-cols-1 md:grid-cols-4 gap-6 group reveal-on-scroll"><div class="md:col-span-1 pt-6 pl-6"><span class="text-5xl font-black opacity-10">${job.number}</span><div class="text-xs font-bold mt-2">${job.date}</div></div><div class="md:col-span-3 hover:bg-white/5 p-6 rounded-lg transition-colors border border-transparent hover:border-white/10"><h4 class="text-2xl font-bold">${job.role}</h4><div class="text-lg font-light mb-4 opacity-80">${job.company}</div><ul class="text-gray-300 font-light text-sm space-y-2">${job.desc.map(i => `<li>&bull; ${i}</li>`).join('')}</ul></div></div>`; });
+            portfolioData.education.forEach((edu) => { document.getElementById('education-list').innerHTML += `<div class="grid grid-cols-1 md:grid-cols-4 gap-6 group reveal-on-scroll"><div class="md:col-span-1 pt-6 pl-6"><span class="text-5xl font-black opacity-10">${edu.number}</span><div class="text-xs font-bold mt-2">${edu.date}</div></div><div class="md:col-span-3 hover:bg-white/5 p-6 rounded-lg transition-colors border border-transparent hover:border-white/10"><h4 class="text-2xl font-bold">${edu.degree}</h4><div class="text-lg font-light mb-4 opacity-80">${edu.school}</div><ul class="text-gray-300 font-light text-sm space-y-2">${edu.desc.map(i => `<li>&bull; ${i}</li>`).join('')}</ul></div></div>`; });
+            portfolioData.projects.forEach((p) => { document.getElementById('projects-list').innerHTML += `<a href="${p.link}" target="_blank" class="tilt-card block h-full bg-white/5 p-8 border border-white/10 rounded-sm reveal-on-scroll"><h4 class="text-xl font-bold mb-4">${p.title}</h4><p class="text-gray-400 font-light text-sm">${p.desc}</p></a>`; });
         }
-
         renderPortfolio();
 
-
-        // ==========================================
-        //  3. TAB LOGIC & NAVIGATION
-        // ==========================================
-
         function switchTab(tabId) {
-            // Hide all tab contents
-            document.querySelectorAll('.tab-content').forEach(tab => {
-                tab.style.display = 'none';
-            });
-            // Reset all tab buttons
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.classList.remove('border-white', 'text-white');
-                btn.classList.add('border-transparent', 'text-white/50');
-            });
-
-            // Show selected tab content
+            document.querySelectorAll('.tab-content').forEach(t => t.style.display = 'none');
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.replace('text-white', 'text-white/40'));
             document.getElementById(tabId).style.display = 'block';
-            
-            // Highlight active button
-            const activeBtn = document.getElementById('tab-btn-' + tabId);
-            activeBtn.classList.remove('border-transparent', 'text-white/50');
-            activeBtn.classList.add('border-white', 'text-white');
-
-            // Trigger stagger animation for inner elements
-            const elements = document.getElementById(tabId).querySelectorAll('.reveal-on-scroll');
-            elements.forEach(el => el.classList.remove('is-visible'));
-            
-            setTimeout(() => {
-                elements.forEach((el, index) => {
-                    setTimeout(() => {
-                        el.classList.add('is-visible');
-                    }, index * 100);
-                });
-            }, 50);
-
-            // On mobile, if a tab is clicked and the screen is low, gently scroll to tabs
-            const el = document.getElementById('resume-tabs');
-            const rect = el.getBoundingClientRect();
-            if (rect.top < 0) {
-                 window.scrollTo({ top: el.offsetTop - 20, behavior: 'smooth' });
-            }
+            document.getElementById('tab-btn-' + tabId).classList.replace('text-white/40', 'text-white');
+            document.getElementById(tabId).querySelectorAll('.reveal-on-scroll').forEach(el => el.classList.add('is-visible'));
         }
-
-        // Initialize first tab on load
         switchTab('experience');
 
-
-        // ==========================================
-        //  4. ANIMATION LOGIC (Background & Observer)
-        // ==========================================
-
-        // Snow Canvas Setup
         const canvas = document.getElementById('snow-canvas');
         const ctx = canvas.getContext('2d');
-        let width, height, snowflakes = [];
-
-        function resizeAndInit() {
-            width = window.innerWidth;
-            height = window.innerHeight;
-            canvas.width = width;
-            canvas.height = height;
-            
-            snowflakes = [];
-            for (let i = 0; i < 100; i++) {
-                snowflakes.push({
-                    x: Math.random() * width,
-                    y: Math.random() * height,
-                    radius: Math.random() * 2 + 1,
-                    speed: Math.random() * 1 + 0.5,
-                    wind: Math.random() * 0.5 - 0.25
-                });
-            }
-        }
-
-        function drawSnow() {
-            ctx.clearRect(0, 0, width, height);
-            ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
-            ctx.beginPath();
-            for (let flake of snowflakes) {
-                ctx.moveTo(flake.x, flake.y);
-                ctx.arc(flake.x, flake.y, flake.radius, 0, Math.PI * 2);
-                
-                flake.y += flake.speed;
-                flake.x += flake.wind;
-                if (flake.y > height) {
-                    flake.y = 0;
-                    flake.x = Math.random() * width;
-                }
-            }
-            ctx.fill();
-            requestAnimationFrame(drawSnow);
-        }
-
-        window.addEventListener('resize', resizeAndInit);
-        resizeAndInit();
-        drawSnow();
-
-        // Standard Scroll Observer for About Section
-        document.addEventListener('DOMContentLoaded', () => {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) entry.target.classList.add('is-visible');
-                });
-            }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
-            
-            // Only observe non-tab items on generic scroll
-            document.querySelectorAll('#about .reveal-on-scroll').forEach(el => observer.observe(el));
-        });
-
-        // 3D Tilt Effect for Project Cards
-        document.querySelectorAll('.tilt-card').forEach(card => {
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                const rotateX = ((y - rect.height / 2) / (rect.height / 2)) * -5;
-                const rotateY = ((x - rect.width / 2) / (rect.width / 2)) * 5;
-                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
-            });
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)';
-            });
-        });
+        let width, height, flakes = [];
+        function resize() { width = window.innerWidth; height = window.innerHeight; canvas.width = width; canvas.height = height; }
+        function draw() { ctx.clearRect(0,0,width,height); ctx.fillStyle = 'rgba(255,255,255,0.3)'; for(let f of flakes) { ctx.beginPath(); ctx.arc(f.x,f.y,f.r,0,Math.PI*2); ctx.fill(); f.y += f.s; if(f.y > height) f.y = 0; } requestAnimationFrame(draw); }
+        window.addEventListener('resize', resize); resize(); 
+        for(let i=0; i<80; i++) flakes.push({x: Math.random()*window.innerWidth, y: Math.random()*window.innerHeight, r: Math.random()*2, s: Math.random()*1});
+        draw();
     </script>
 </body>
 </html>
